@@ -27,8 +27,9 @@
 
 ## 4. 반복문으로 네모 출력
 
-```for i in range(m):
-    for j in range(n):
+```
+for i in range(m):
+	for j in range(n):
         if j == n - 1:
             print('*')
         else:
@@ -45,8 +46,9 @@
 
 ## 6. list 평균값
 
-```total = 0
-for i in scores:
+```
+total = 0
+	for i in scores:
     total = total + i
 scores_average = total / len(scores)
 print(scores_average)```
