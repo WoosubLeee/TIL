@@ -22,7 +22,7 @@ def credits(title):
     # crew 리스트 중 Directing department인 사람만 result에 append
     for p in response['crew']:
         if p['known_for_department'] == 'Directing':
-            result['crew'].append(p['name'])
+            result['crew'].extend(p['name'])
     return result
 
 
