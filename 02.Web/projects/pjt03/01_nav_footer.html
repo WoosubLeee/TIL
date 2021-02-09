@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="01_nav_footer.css">
+  <title>Navbar Footer Test</title>
+</head>
+<body>
+  <!-- 01_nav_footer.html -->
+  <!-- navbar : navbar component 활용하기 적합하므로
+  navbar-expand-md : md 이상이 될 때 navbar-nav의 nav-item들이 펼쳐져 보여지게 됨
+  sticky-top : 항상 상단에 보임. fixed-top은 아래 element들과 overlap되어 sticky-top 사용 -->
+  <nav class="navbar navbar-expand-md sticky-top navbar-dark bg-dark">
+    <!-- container-fluid : viewport의 넓이에 따라 navbar가 늘어나도록 함 -->
+    <div class="container-fluid">
+      <!-- navbar-brand : 페이지의 brand이므로 설정, 특별한 효과는 없지만 element의 목적성에 맞추기 위해 설정 -->
+      <a class="navbar-brand" href="02_home.html">
+        <img src="images/logo.png" alt="" height="50">
+      </a>
+      <div>
+        <!-- navbar-toggler : toggler component(햄버거)를 사용하기 위해
+        data-bs-toggle="collapse" : toggler로 collapse를 하려면 꼭 써야한다고 한다...docs에
+        data-bs-target : collapse할 list의 id -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+          <!-- navbar-toggler-icon : 햄버거 아이콘을 bootstrap에서 자동 제공해줌 -->
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+      <!-- collapse : 화면이 줄었을 경우 메뉴가 접힌 상태로 보여짐
+      navbar-collapse : toggler collapse를 사용하게 해주는 navbar의 content인 것으로 보임 -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <!-- navbar-nav : navbar의 nav 메뉴로 설정
+        ms-md-auto : md 이상일 때만 왼쪽에 margin을 줘서 우측 정렬하도록 함. md 미만일 경우는 원래대로(좌측 정렬) -->
+        <ul class="navbar-nav ms-md-auto">
+          <!-- nav-item : nav의 한 메뉴임을 설정 -->
+          <li class="nav-item mx-2">
+            <!-- nav-link : nav의 링크 역할로 설정
+            active : 강조 표시 -->
+            <a class="nav-link active text-decoration-none" href="02_home.html">Home</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link text-decoration-none" href="03_community.html">Community</a>
+          </li>
+          <li class="nav-item mx-2">
+            <!-- data-bs-toggle : toggle할 경우(누를 경우) modal을 켜도록 설정
+            href="#login-modal" : login-modal의 id를 가진 element로 링크 -->
+            <a class="nav-link text-decoration-none" data-bs-toggle="modal" href="#login-modal">Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- modal : bootstrap의 modal component 활용 -->
+  <div id="login-modal" class="modal">
+    <!-- modal-dialog : 뭔지 모르겠지만 빼면 modal 안 보임. modal 그 자체인 듯 -->
+    <div class="modal-dialog">
+      <!-- modal-content : 뭔지 모르겠지만 빼면 배경 투명색 됨 -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Login</h5>
+          <!-- btn-close : button을 클릭하면 대상 element를 닫는 속성을 부여
+          data-bs-dismiss : "modal" : 대상을 modal으로 설정 -->
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <form class="modal-body">
+          <div>
+            <!-- for="username" : label의 대상을 username이란 id를 가진 element로 설정 -->
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username">
+          </div>
+          <div class="mt-2">
+            <label for="password" class="form-label">Password</label>
+            <!-- type="password" : password type으로 설정하여 내용이 보이지 않도록 함 -->
+            <input type="password" class="form-control" id="password">
+          </div>
+          <div class="form-check mt-2">
+            <!-- type="checkbox" : input의 type을 checkbox 형태로 만듦 -->
+            <input type="checkbox" class="form-check-input" id="checkbox">
+            <label class="form-check-label" for="checkbox">Check me out</label>
+          </div>
+        </form>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- fixed-bottom : 하단에 고정되서 항상 보이도록 함 -->
+  <footer class="fixed-bottom bg-light">
+    <p class="text-center mb-0">Web-bootstrap PJT. by Woosub Lee</p>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+</body>
+</html>

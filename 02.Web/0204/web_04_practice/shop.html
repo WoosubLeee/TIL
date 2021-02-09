@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="shop.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <title>Title</title>
+</head>
+<body>
+  <!-- nav -->
+  <!-- 상단 메뉴바이므로 navbar 속성 부여 -->
+  <nav class="navbar">
+    <!-- 무한정 늘어나지 않는 container가 필요하므로 container-fluid가 아닌 container 속성 부여 -->
+    <div class="container">
+      <!-- 브랜드 로고이므로 navbar-brand 선언
+        좌측 간격 주기 위해 ms-5 -->
+      <span class="navbar-brand">SAMSUNG</span>
+      <!-- nav 탭이므로 nav 선언 -->
+      <ul class="nav">
+        <!-- nav 탭의 한 item이므로 nav-item 선언
+        element 간 간격 주기 위해 mx-3 -->
+        <li class="nav-item mx-3">
+          <!-- nav 메뉴의 link 역할을 하므로 nav_link 선언
+          underline 제거를 위해 text-decoration-none -->
+          <a href="#" class="nav_link text-decoration-none text-dark fw-bold">Contact</a>
+        </li>
+        <li class="nav-item mx-3">
+          <a href="#" class="nav_link text-decoration-none text-dark fw-bold">Cart</a>
+        </li>
+        <li class="nav-item mx-3">
+          <a href="#" class="nav_link text-decoration-none text-dark fw-bold">Login</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <!-- section -->
+    <!-- viewport width에 따라 사진이 잘릴 수 있도록 하기 위해 css 활용(shop.css 참조) -->
+    <section class="main-image"></section>
+
+    <!-- article -->
+    <!-- section과의 간격을 벌리기 위해 my-5
+    text center align을 위한 text-center -->
+    <article class="text-center my-5">
+      <h4 class="fw-bold mb-5">Our New Products</h4>
+      <!-- grid system 활용을 위해 row 선언
+      grid column 간 간격을 주기 위해 g-4 -->
+      <div class="row g-4">
+        <!-- 768px 이상일 경우 6 column, 992px 이상일 경우 3 column, 해당 없을 경우(768px 미만일 경우) 12 column 차지 -->
+        <div class="col-12 col-sm-6 col-md-3">
+          <!-- text underline 제거를 위한 text-decoration-none -->
+          <a href="#" class="text-decoration-none text-dark fw-bold">
+            <!-- card component가 적합하므로 card 선언 -->
+            <div class="card">
+              <!-- card 상단에 들어가는 image이므로 card-img-top 선언 -->
+              <img src="images/buds.jpg" alt="" class="card-img-top">
+              <!-- card의 main 설명이 들어가는 부분이므로 card-body 선언 -->
+              <div class="card-body">
+                <h6 class="fw-bold">Buds</h6>
+                <!-- text의 세로 중앙 정렬을 방해하는 bottom margin 제거 -->
+                <p class="m-0">179,000</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-12 col-sm-6 col-md-3">
+          <a href="#" class="text-decoration-none text-dark fw-bold">
+            <div class="card">
+              <img src="images/buds.jpg" alt="" class="card-img-top">
+              <div class="card-body">
+                <h6 class="fw-bold">Buds</h6>
+                <p class="m-0">179,000</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-12 col-sm-6 col-md-3">
+          <a href="#" class="text-decoration-none text-dark fw-bold">
+            <div class="card">
+              <img src="images/buds.jpg" alt="" class="card-img-top">
+              <div class="card-body">
+                <h6 class="fw-bold">Buds</h6>
+                <p class="m-0">179,000</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-12 col-sm-6 col-md-3">
+          <a href="#" class="text-decoration-none text-dark fw-bold">
+            <div class="card">
+              <img src="images/buds.jpg" alt="" class="card-img-top">
+              <div class="card-body">
+                <h6 class="fw-bold">Buds</h6>
+                <p class="m-0">179,000</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- footer -->
+    <!-- 세 images의 center align을 위해 flex 선언 후 justify-content-center -->
+    <footer class="d-flex justify-content-center mb-5">
+      <div>
+        <!-- image에 보이는 underline 제거 -->
+        <a href="https://www.instagram.com/" class="text-decoration-none">
+          <img src="images/instagram.png" alt="" style="width: 35px;">
+        </a>
+        <a href="https://www.facebook.com/" class="text-decoration-none">
+          <img src="images/facebook.png" alt="" style="width: 35px;">
+        </a>
+        <a href="https://www.twitter.com/" class="text-decoration-none">
+          <img src="images/twitter.png" alt="" style="width: 35px;">
+        </a>
+      </div>
+    </footer>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+</body>
+</html>

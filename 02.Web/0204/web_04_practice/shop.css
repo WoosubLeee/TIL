@@ -1,0 +1,11 @@
+/* 아래에 코드를 작성하시오. */
+.main-image {
+  background-image: url('images/main.png');
+  /* image의 중앙 정렬 */
+  background-position: center;
+  /* cover : Scales the image as large as possible to fill the container, stretching the image if necessary */
+  background-size: cover;
+  /* background가 달릴 section tag의 크기 설정
+  container를 fill하는 cover의 속성 -> 좌우가 잘리게 하려면 height만 설정 */
+  height: 600px;
+}

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="01_nav_footer.css">
+  <link rel="stylesheet" href="02_home.css">
+  <title>Home</title>
+</head>
+<body>
+
+  <!-- 01_nav_footer.html -->
+  <!-- 01_nav_footer 에서 완성한 Navigation bar 코드를 붙여넣어 주세요. -->
+  <nav class="navbar navbar-expand-md sticky-top navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="02_home.html">
+        <img src="images/logo.png" alt="" height="50">
+      </a>
+      <div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-md-auto">
+          <li class="nav-item mx-2">
+            <a class="nav-link active text-decoration-none" href="02_home.html">Home</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link text-decoration-none" href="03_community.html">Community</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link text-decoration-none" data-bs-toggle="modal" href="#login-modal">Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div id="login-modal" class="modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Login</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <form action="" class="modal-body">
+          <div>
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username">
+          </div>
+          <div class="mt-2">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password">
+          </div>
+          <div class="form-check mt-2">
+            <input type="checkbox" class="form-check-input" id="checkbox">
+            <label class="form-check-label" for="checkbox">Check me out</label>
+          </div>
+        </form>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="fixed-bottom bg-light">
+    <p class="text-center mb-0">Web-bootstrap PJT. by Woosub Lee</p>
+  </footer>
+
+  <!-- 02_home.html -->
+  <!-- carousel : bootstrap의 carousel component를 활용하기 위해
+  slide : slide 형식으로 넘어가도록함
+  data-bs-ride="carousel" : page를 load할 때 자동으로 animation이 시작하도록 함 -->
+  <header class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <!-- active : 시작할 때 나올 element로 설정 -->
+      <div class="carousel-item active">
+        <!-- w-100 : 사진이 화면에 맞도록 설정 -->
+        <img src="images/header1.jpg" class="w-100" alt="">
+      </div>
+      <div class="carousel-item">
+        <img src="images/header2.jpg" class="w-100" alt="">
+      </div>
+      <div class="carousel-item">
+        <img src="images/header3.jpg" class="w-100" alt="">
+      </div>
+    </div>
+
+  </header>
+
+  <h1 class="text-center fw-bold my-4">Boxoffice</h1>
+
+  <!-- container : grid systems 활용을 위해 -->
+  <section class="container my-5">
+    <!-- row-cols-1 : default값 - 1 column만 나오게
+    row-cols-sm-2 : sm 이상이 될 경우 2 columns씩 나오게
+    g-5 : 각 element마다 gutter를 줌 -->
+    <div class="row row-cols-1 row-cols-sm-2 g-5">
+      <div class="col">
+        <article class="card">
+          <img src="images/movie1.jpg" alt="">
+          <div class="card-body">
+            <h5 class="card-title">Movie Title</h5>
+            <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsa eveniet iusto facere consequuntur nam doloremque distinctio unde veritatis quae ut? At aliquid corporis adipisci veniam.</p>
+          </div>
+        </article>
+      </div>
+      <div class="col">
+        <article class="card">
+          <img src="images/movie2.jpg" alt="">
+          <div class="card-body">
+            <h5 class="card-title">Movie Title</h5>
+            <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsa eveniet iusto facere consequuntur nam doloremque distinctio unde veritatis quae ut? At aliquid corporis adipisci veniam.</p>
+          </div>
+        </article>
+      </div>
+      <div class="col">
+        <article class="card">
+          <img src="images/movie3.jpg" alt="">
+          <div class="card-body">
+            <h5 class="card-title">Movie Title</h5>
+            <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsa eveniet iusto facere consequuntur nam doloremque distinctio unde veritatis quae ut? At aliquid corporis adipisci veniam.</p>
+          </div>
+        </article>
+      </div>
+      <div class="col">
+        <article class="card">
+          <img src="images/movie4.jpg" alt="">
+          <div class="card-body">
+            <h5 class="card-title">Movie Title</h5>
+            <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsa eveniet iusto facere consequuntur nam doloremque distinctio unde veritatis quae ut? At aliquid corporis adipisci veniam.</p>
+          </div>
+        </article>
+      </div>
+      <div class="col">
+        <article class="card">
+          <img src="images/movie5.jpg" alt="">
+          <div class="card-body">
+            <h5 class="card-title">Movie Title</h5>
+            <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsa eveniet iusto facere consequuntur nam doloremque distinctio unde veritatis quae ut? At aliquid corporis adipisci veniam.</p>
+          </div>
+        </article>
+      </div>
+      <div class="col">
+        <article class="card">
+          <img src="images/movie6.jpg" alt="">
+          <div class="card-body">
+            <h5 class="card-title">Movie Title</h5>
+            <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsa eveniet iusto facere consequuntur nam doloremque distinctio unde veritatis quae ut? At aliquid corporis adipisci veniam.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+</body>
+</html>
