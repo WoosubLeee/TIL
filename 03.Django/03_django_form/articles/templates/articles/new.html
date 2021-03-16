@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 class="text-center">New Article</h1>
+  <hr>
+  <form action="" method="POST">  {% comment %} 자기 자신에게 다시보내는 경우 action을 비워둬도 된다 {% endcomment %}
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="글 작성">
+  </form>
+  <a href="{% url 'articles:index' %}">BACK</a>
+{% endblock content %}

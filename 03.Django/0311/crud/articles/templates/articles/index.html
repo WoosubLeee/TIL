@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container mt-5">
+    <h1>INDEX</h1>
+    <a href="{% url 'articles:new' %}" style="text-decoration:none">NEW</a>
+    <div class="container mt-4">
+      {% for article in articles %}
+        <div class="container">
+          <h3>제목: {{ article.title }}</h3>
+          <p>내용: {{ article.content }}</p>
+          <a href="{% url 'articles:detail' article.pk %}" style="text-decoration:none">DETAIL</a>
+        </div>
+        <hr>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock content %}

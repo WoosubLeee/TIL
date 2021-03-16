@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>오늘 저녁은 {{ pick }}!</h1>
+  <p>{{ pick }}은 {{ pick|length }}글자</p>  {# 몇 글자인지 표시 #}
+  <p>{{ foods|truncatewords:2 }}</p>  {# n개의 word까지만 표시 #}
+  <p>{{ foods|join:", " }}</p>
+
+  <p>메뉴판</p>
+  <ul>
+    {% for food in foods %}
+      <li>{{ food }}</li>
+    {% endfor %}  
+  </ul>
+
+  <a href="/index/">뒤로</a>
+</body>
+</html>
+
+{# 이것은 주석입니다. #}
+
+<!-- 이것은 주석2입니다. -->
+
+{% comment %} <p>이것은</p>
+<p>ctrl + / 를 활용한</p>
+<p>여러줄</p>
+<p>주석입니다.</p> {% endcomment %}

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 class="text-center">Edit Article</h1>
+  <hr>
+  <form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_table }}
+    <input type="submit" value="글 작성">
+  </form>
+  <a href="{% url 'articles:detail' form.instance.pk %}">BACK</a>
+{% endblock content %}
