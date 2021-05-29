@@ -1,11 +1,19 @@
 {% extends 'base.html' %}
+{% load bootstrap5 %}
 
 {% block content %}
   <h1 class="text-center">Edit Article</h1>
   <hr>
   <form action="" method="POST">
     {% csrf_token %}
-    {{ form.as_table }}
+    {% comment %} {% bootstrap_form form %} {% endcomment %}
+    {% bootstrap_form form layout='horizontal' %}
+
+    {% buttons submit='OK' reset="Cancel" %}{% endbuttons %}
+    {% comment %} {% buttons %}
+        <button type="submit" class="btn btn-primary">Submit</button>
+    {% endbuttons %} {% endcomment %}
+
     <input type="submit" value="글 작성">
   </form>
   <a href="{% url 'articles:detail' form.instance.pk %}">BACK</a>

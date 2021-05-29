@@ -6,7 +6,7 @@ class ArticleForm(forms.ModelForm):
         label='제목',
         widget=forms.TextInput(
             attrs={
-                'class': 'title',
+                'class': 'title form-control',
                 'placeholder': 'Enter the title',
             }
         )
@@ -15,7 +15,7 @@ class ArticleForm(forms.ModelForm):
         label='내용',
         widget=forms.Textarea(
             attrs={
-                'class': 'content',
+                'class': 'content form-control',
                 'placeholder': 'Enter the content',
             }
         )

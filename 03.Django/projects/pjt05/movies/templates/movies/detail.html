@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 class="text-center">Detail</h1>
+  <hr>
+  <div class="d-flex justify-content-center">
+    <img src="{{ movie.poster_path }}" alt="">
+  </div>
+  <h3 class="text-center my-4">{{ movie.title }}</h3>
+  <p>{{ movie.overview }}</p>
+  <div class="d-flex justify-content-end">
+    <a href="{% url 'movies:update' movie.pk %}" class="btn btn-warning mx-3">EDIT</a>
+    <form action="{% url 'movies:delete' movie.pk %}" method="POST">
+      {% csrf_token %}
+      <button class="btn btn-danger mx-3">DELETE</button>
+    </form>
+    <a href="{% url 'movies:index' %}" class="btn btn-primary mx-3">BACK</a>
+  </div>
+{% endblock content %}

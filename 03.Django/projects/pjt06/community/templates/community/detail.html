@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 class="text-center fw-bold">DETAIL</h1>
+  <hr>
+  <div class='d-flex justify-content-between align-items-center'>
+    <p class='fw-bold h3'>Title : {{ review.title }}</p>
+    <div class='d-flex flex-column align-items-end'>
+      <p class='my-auto'>Created_at : {{ review.created_at }}</p>
+      <p class='my-auto'>Updated_at : {{ review.updated_at }}</p>
+      <p class='my-auto'>작성자 : {{ review.user }}</p>
+    </div>
+  </div>
+  <br>
+  <p>Rank : {{ review.rank }}</p>
+  <p>Movie_Title : {{ review.movie_title }}</p>
+  <p>Content : {{ review.content }}</p>
+  <hr>
+  <h3 class='fw-bold'>Comments ({{ comments|length }})</h3>
+  <ul>
+    {% for comment in comments %}
+      <div class='d-flex justify-content-between my-2'>
+        <li>
+          {{ comment }}
+        </li>
+        <p class='my-auto'>작성자 : {{ comment.user }}</p>
+      </div>
+    {% endfor %}
+  </ul>
+  <hr>
+  <form action="{% url 'community:comments_create' review.pk %}" method='POST'>
+    {% csrf_token %}
+    <div class='d-flex justify-content-between'>
+      <div>
+        {{ comment_form }}
+      </div>
+      <input type="submit" class='btn btn-warning'>
+    </div>
+  </form>
+{% endblock content %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <h1 class="text-center mb-4">{{ subject.subject }}</h1>
+  <div class="progress" style="height: 100px"> 
+    <div class="progress-bar progress-bar-striped" style="width: {{ t_percent }}%; font-size: 50px">{{ t_percent }}%</div>
+    <div class="progress-bar progress-bar-striped bg-danger" style="width: {{ f_percent }}%; font-size: 50px">{{ f_percent }}%</div>
+  </div>
+    <h2 class="text-center my-4">{{ subject.choice_1}} VS {{ subject.choice_2 }}</h2>
+
+  
+  <form action="{% url 'votes:vote' subject.pk %}" method="POST" class="d-flex flex-column align-items-center my-4">
+    {% csrf_token %}
+    {{ form.as_table }}
+    <button class="my-4">제출</button>
+  </form>
+  {% for vote in votes %}
+    <div class="d-flex justify-content-between">
+      {% if vote.choice == 1 %}
+        <span>[{{ subject.choice_1 }}] {{ vote.comment }}</span>
+      {% else %}
+        <span>[{{ subject.choice_2 }}] {{ vote.comment }}</span>      
+      {% endif %}
+      <span>{{ vote.created_at }}</span>
+    </div>
+    <hr class="m-1">
+  {% endfor %}
+
+{% endblock content %}

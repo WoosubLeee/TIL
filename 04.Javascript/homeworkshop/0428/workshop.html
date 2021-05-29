@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <form action="">
+    <input type="text">
+    <button>Add</button>
+  </form>
+  <ul></ul>
+  
+  <script>
+    const todoForm = document.querySelector('form')
+    todoForm.addEventListener('submit', function (event) {
+      event.preventDefault()
+
+      const todo = document.createElement('li')
+      const input = document.querySelector('input')
+      if (input.value) {
+        todo.innerText = input.value
+        const todoList = document.querySelector('ul')
+        todoList.append(todo)
+
+        event.target.reset()
+      } else {
+        alert('내용을 입력하세요')
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>{{ reservation.title }}</h2>
+  <p>인원: {{ reservation.personnel }}명</p>
+  <!-- Q2-4 -->
+  <p>날짜: {{ reservation.date }}</p>
+  <!-- Q2-4 -->
+  <hr>
+  <h4>comments</h4>
+  {% for comment in reservation.comment_set.all %}
+    <div>
+      - {{ comment.content }}
+    </div>
+  {% empty %}
+    <p><b>댓글이 없습니다.</b></p>
+  {% endfor %}
+  <hr>
+  <form action="{% url 'reservations:comments_create' reservation.pk %}" method="POST">
+    {% csrf_token %}
+    {{ comment_form }}
+    <input type="submit">
+  </form>
+{% endblock  %}

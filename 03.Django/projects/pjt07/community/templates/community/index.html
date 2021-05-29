@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="row my-2">
+    <div class="item col-12 col-sm-8">
+      {% if request.user.is_authenticated and request.user.followings.all %}
+        <div class="container-fluid card mb-3">
+          <div class="row d-flex flex-nowrap mt-3" style="overflow-x: auto;">
+            {% for following in request.user.followings.all %}
+              <a href="{% url 'accounts:profile' following.pk %}" class="col-2 d-flex flex-column align-items-center justify-content-between text-decoration-none">
+                {% if following.image %}
+                  <img src="{{ following.image.url }}" class="rounded-circle" width="45" height="45">
+                {% else %}
+                  <i class="far fa-user-circle fa-3x text-dark"></i>
+                {% endif %}
+                <p style="font-size: 15px" class="text-dark">{{ following.username }}</p>
+              </a>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+      {% for review in reviews %}
+        {% include 'community/_card.html' %}
+      {% endfor %}
+    </div>
+    <div class="item col-0 col-sm-4">
+      <div class="card text-center" style="height: 250px;">
+       <p>뭔가 채워야 하지만 비워둡니다</p>
+      </div>
+    </div>
+  </div>
+  
+{% endblock %}

@@ -1,0 +1,71 @@
+{% load bootstrap5 %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% bootstrap_css %}
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+  <link rel="stylesheet" href="{% static 'base.css' %}">
+  <title>PJT07</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+</head>
+<body>
+  <div class="container">
+    <ul class="nav justify-content-between bg-light p-2">
+      <li>
+        <a class="nav-link" href="{% url 'community:index' %}">
+          <i class="fas fa-home fa-2x text-dark"></i>
+        </a>
+      </li>
+      <div class="d-flex">
+        <li class="d-flex flex-column justify-content-center">
+          <a class="nav-link" href="{% url 'community:create' %}">
+            <i class="fas fa-pen text-dark"></i>
+          </a>
+        </li>
+        {% if request.user.is_authenticated %}
+          <li class="dropdown d-flex flex-column justify-content-center">
+            <a class="nav-link dropdown-toggle text-dark" role="button" data-bs-toggle="dropdown">
+              {% if request.user.image %}
+                <img src="{{ request.user.image.url }}" class="rounded-circle" width="37" height="37">
+              {% else %}
+                <i class="far fa-user-circle fa-2x"></i>
+              {% endif %}
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="{% url 'accounts:profile' request.user.id %}" class="dropdown-item">프로필</a>
+              </li>
+              <hr class="m-1">
+              <li>
+                <form class="dropdown-item" action="{% url 'accounts:logout' %}" method="POST">
+                  {% csrf_token %}
+                  <button class="p-0">로그아웃</button>
+                </form>
+              </li>
+            </ul>
+          </li>
+        {% else %}
+          <li class="nav-item d-flex flex-column justify-content-center">
+            <a class="nav-link text-dark" href="{% url 'accounts:login' %}">Sign in</a>
+          </li>
+          <li class="nav-item d-flex flex-column justify-content-center">
+            <a class="nav-link text-dark" href="{% url 'accounts:signup' %}">Sign up</a>
+          </li>
+        {% endif %}
+      </div>
+    </ul>
+  </div>
+  
+  <div class="container my-3">
+    {% block content %}
+
+    {% endblock %}
+  </div>
+  {% bootstrap_javascript %}
+</body>
+</html>

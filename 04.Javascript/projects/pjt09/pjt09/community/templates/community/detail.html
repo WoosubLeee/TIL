@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2 class="text-center">DETAIL</h2>
+  <h3>{{ review.pk }} 번째 글</h3>
+  <hr>
+  <p>제목: {{ review.title }}</p>
+  <p>영화 제목: {{ review.movie_title }}</p>
+  <p>내용: {{ review.content }}</p>
+  <p>평점: {{ review.rank }}</p>
+  <p>작성 시각: {{ review.created_at }}</p>
+  <p>수정 시각: {{ review.updated_at }}</p>
+  <form id="like-form" data-review-id="{{ review.pk }}">
+    {% csrf_token %}
+    {% if request.user in review.like_users.all %}
+      <button class="btn btn-link">
+        <i id="like-icon" class="fas fa-heart fa-lg" style="color:crimson;"></i>
+      </button>
+    {% else %}
+      <button class="btn btn-link">
+        <i id="like-icon" class="fas fa-heart fa-lg" style="color:black;"></i>
+      </button>
+    {% endif %}
+  </form>
+  <p id="like-count">{{ review.like_users.all|length }}명이 좋아합니다</p>
+  <hr>
+  <h4>댓글 목록</h4>
+  {% if comments|length %}
+    <p><b>{{ comments|length }}개의 댓글이 있습니다.</b></p>
+  {% endif %}
+  {% for comment in comments %}
+    <div>
+      {{ comment.user }} - {{ comment.content }}
+    </div>
+  {% empty %}
+    <p><b>댓글이 없어요..</b></p>
+  {% endfor %}
+  <hr>
+  {% if request.user.is_authenticated %}
+    <form action="{% url 'community:create_comment' review.pk %}" method="POST">
+      {% csrf_token %}
+      {{ comment_form }}
+      <input type="submit">
+    </form>
+  {% else %}
+    <a href="{% url 'accounts:login' %}">[댓글을 작성하려면 로그인하세요.]</a>
+  {% endif %}
+  <a href="{% url 'community:index' %}">[back]</a>
+
+  <script>
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+    const form = document.querySelector('#like-form')
+    form.addEventListener('submit', function (event) {
+      event.preventDefault()
+      const reviewId = event.target.dataset.reviewId
+      axios({
+        method: 'post',
+        url: `http://127.0.0.1:8000/community/${reviewId}/like/`,
+        headers: {'X-CSRFToken': csrftoken }
+      })
+      .then (response => {
+        const liked = response.data.liked
+        const count = response.data.count
+        const likeIcon = document.querySelector('#like-icon')
+        const likeCnt = document.querySelector('#like-count')
+        if (liked) {
+          likeIcon.setAttribute("style", "color:crimson;")
+        } else {
+          likeIcon.setAttribute("style", "color:black;")e
+        }
+        likeCnt.innerText = `${count}명이 좋아합니다`
+      })
+      .catch (error => {
+        if (error.response.status === 401) {
+          alert('로그인 후 이용해주세요')
+          location.href = 'http://127.0.0.1:8000/accounts/login/'
+        }
+      })
+    })
+  </script>
+{% endblock  %}
