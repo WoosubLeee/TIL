@@ -25,13 +25,35 @@ variableA = 10;
 var variableB = 10;
 ```
 
-**Escaping Literal Quotes in Strings**
+#### String
 
-quote 앞에 backslash (`\`)를 붙이면 사용할 수 있다.
+##### Escape sequences
+
+| Code | Output          |
+| ---- | --------------- |
+| `\'` | single quote    |
+| `\"` | double quote    |
+| `\\` | backslash       |
+| `\n` | newline         |
+| `\r` | carriage return |
+| `\t` | tab             |
+| `\b` | word boundary   |
+| `\f` | form feed       |
+
+##### Index
+
+Bracket notation을 사용한다.
 
 ```js
-var sample = "I said \"javascript\", and they ran away."
+var firstName = 'Charles';
+console.log(firstName[0]) // C
 ```
 
+##### Immutability
 
+```js
+var myStr = "Bob";
+myStr[0] = "J";
+// Job으로 바뀌지 않는다.
+```
 
