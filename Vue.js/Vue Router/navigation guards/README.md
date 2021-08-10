@@ -82,8 +82,6 @@ const Foo = {
 }
 ```
 
-
-
 #### `beforeRouteEnter`
 
 Called before the route is confirmed.
