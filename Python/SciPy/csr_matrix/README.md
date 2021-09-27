@@ -1,6 +1,6 @@
 # csr_matrix
 
-Compressed Sparse Matrix
+Compressed Sparse Row Matrix
 희소행렬을 효율적으로 저장하는 방법.
 
 
