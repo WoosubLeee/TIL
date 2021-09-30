@@ -102,6 +102,18 @@ ourArray[0] = 15;
 console.log(ourArray); // [15, 40, 30]
 ```
 
+##### `indexOf()`
+
+Takes an element as a parameter, and when called, it returns the position, or index, of that element, or `-1` if the element does not exist on the array.
+
+```js
+let fruits = ['apples', 'pears', 'oranges', 'peaches', 'pears'];
+
+fruits.indexOf('dates');  // -1
+fruits.indexOf('oranges');  // 2
+fruits.indexOf('pears');  // 1(the first index at which each element exists)
+```
+
 #### Manipulating arrays
 
 ##### `push()`
@@ -142,6 +154,39 @@ Add an element at the beginning of an array.
 var ourArray = ["J", "cat"];
 ourArray.unshift("Happy");
 console.log(ourArray); // ["Happy", "J", "cat"]
+```
+
+##### `splice()`
+
+Remove any number of consecutive elements from anywhere in an array. The first parameter represents the index on the array from which to begin removing elements, while the second parameter indicates the number of elements to delete.
+
+```js
+let array = ['I', 'am', 'feeling', 'really', 'happy'];
+let newArray = array.splice(3, 2);
+console.log(array);  // ['I', 'am', 'feeling'];
+console.log(newArray);  // ['really', 'happy'];
+```
+
+You can use the third parameter, comprised of one or more elements, to add to the array.
+
+```js
+const numbers = [10, 11, 12, 12, 15];
+const startIndex = 3;
+const amountToDelete = 1;
+
+numbers.splice(startIndex, amountToDelete, 13, 14);
+console.log(numbers);  // [10, 11, 12, 13, 14, 15]
+```
+
+##### `slice()`
+
+Copies or extracts a given number of elements to a new array, leaving the array it is called upon untouched. `slice()` takes only 2 parameters — the first is the index at which to begin extraction, and the second is the index at which to stop extraction (extraction will occur up to, but not including the element at this index).
+
+```js
+let weatherConditions = ['rain', 'snow', 'sleet', 'hail', 'clear'];
+let todaysWeather = weatherConditions.slice(1, 3);
+console.log(weatherConditions)  // ['rain', 'snow', 'sleet', 'hail', 'clear']
+console.log(todaysWeather)  // ['snow', 'sleet']
 ```
 
 
@@ -374,54 +419,6 @@ function findGreaterOrEqual(a, b) {
 ```
 
 It's considered best practice to format multiple conditional operators such that each condition is on a separtae line, as shown above.
-
-
-
-### `object`
-
-You access the data in `objects` through what are called `properties`. You can also use numbers as properties in addition to strings. You can even omit the quotes for single-word string properties.
-
-```js
-var anotherObject = {
-  make: "Ford",
-  5: "five",
-  "model": "focus"
-};
-```
-
-#### Accessing `object` properties
-
-You can use **1. dot notation** or **2. bracket notation** to access object properties.
-
-```js
-var myObj = {
-  "Space Name": "Kirk",
-  "More Space": "Spock",
-  "NoSpace": "USS Enterprise"
-};
-myObj.NoSpace;  // "USS Enterprise"
-myObj["Space Name"];  // "Kirk"
-```
-
-#### Deleting properties
-
-```js
-delete object.property;
-delete object["property"];
-```
-
-#### Testing `objects` for properties
-
-You can use `.hasOwnProperty(propname)` method to check if the object has the given property or not.
-
-```js
-var myObj = {
-  top: "hat",
-  bottom: "pants"
-};
-myObj.hasOwnProperty("top");  // true
-myObj.hasOwnProperty("middle");  // false
-```
 
 
 

@@ -142,7 +142,7 @@ const maximus = Math.max(...arr);  // ES6
 However, the spread operator only works in-place, like in an argument to a function or in an array literal. The following code will not work.
 
 ```js
-const spreaded = ...arr;
+const spreaded = ...arr;  // not working
 ```
 
 
@@ -307,5 +307,4 @@ You can shorten this code.
 ```js
 const getMousePosition = (x, y) => ({ x, y });
 ```
-
 
