@@ -12,7 +12,9 @@ var anotherObject = {
 
 
 
-## Accessing `object` properties
+## Properties
+
+### Accessing
 
 You can use **1. dot notation** or **2. bracket notation** to access object properties.
 
@@ -26,7 +28,7 @@ myObj.NoSpace;  // "USS Enterprise"
 myObj["Space Name"];  // "Kirk"
 ```
 
-### `this`
+#### `this`
 
 `this` refers to the object itself.
 
@@ -42,18 +44,14 @@ let duck = {
 console.log(duck.sayName());  // 'Aflac'
 ```
 
-
-
-## Deleting properties
+### Deleting
 
 ```js
 delete object.property;
 delete object["property"];
 ```
 
-
-
-## Testing `objects` for properties
+### Testing
 
 We could check for its presence in either of the following ways:
 
@@ -67,28 +65,6 @@ myObj.hasOwnProperty("middle");  // false
 
 "top" in myObj;  // true
 "middle" in myObj;  // false
-```
-
-
-
-## Iterating through the keys of an object
-
-```js
-var users = {
-  Alan: {
-    online: false
-  },
-  Jeff: {
-    online: true
-  },
-  Sarah: {
-    online: false
-  }
-}
-
-for (let user in users) {
-  console.log(user);  // 'Alan', 'Jeff', 'Sarah'
-}
 ```
 
 
@@ -112,11 +88,31 @@ let users = {
 console.log(Object.keys(users));  // ['Alan', 'Jeff']
 ```
 
+### Iterating through the keys of an object
+
+```js
+var users = {
+  Alan: {
+    online: false
+  },
+  Jeff: {
+    online: true
+  },
+  Sarah: {
+    online: false
+  }
+}
+
+for (let user in users) {
+  console.log(user);  // 'Alan', 'Jeff', 'Sarah'
+}
+```
+
 
 
 ## Constructor
 
-Constructors are functions that create new objects. They define properties and behaviors that will belong to the new object.
+Constructors are functions that create new objects. They define properties(called **own properties**) and behaviors that will belong to the new object.
 
 ```js
 function Bird(name) {
@@ -134,9 +130,7 @@ Constructors follow a few conventions:
 - They use `this` keyword that refers to the new object it will create.
 - Constructors define properties and behaviors instead of returning a value as other functions might.
 
-
-
-## `instanceof`
+### `instanceof`
 
 `instanceof` allows you to compare an object to a constructor, return boolean value based on whether or not that object was created with the constructor.
 
@@ -152,16 +146,15 @@ let crow = new Bird("Alexis", "black");
 crow instanceof Bird;  // true
 ```
 
+### `.constructor`
 
-
-## `.prototype`
-
-Properties in the `prototype` are shared among ALL instances of an object.
+It's a reference to the constructor function that created the instance.
 
 ```js
-Bird.prototype.numLegs = 2;
+let duck = new Bird();
+let beagle = new Dog();
 
-console.log(duck.numLegs);  // 2
-console.log(canary.numLegs);  // 2
+console.log(duck.constructor === Bird);  // true
+console.log(beagle.constructor === Dog);  // true
 ```
 
