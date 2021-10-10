@@ -158,3 +158,108 @@ console.log(duck.constructor === Bird);  // true
 console.log(beagle.constructor === Dog);  // true
 ```
 
+
+
+## Mixin
+
+Object behavior can be shared through inheritance. However, there are cases when inheritance is not the best solution. Inheritance does not work well for unrelated objects like `Bird` and `Airplane`. They can both fly, but a `Bird` is not a type of `Airplane` and vice versa.
+
+For unrelated objects, it's better to use mixins. A mixin allows other objects to use a collection of functions.
+
+```js
+let flyMixin = function(obj) {
+  obj.fly = function() {
+    console.log("Flying, wooosh!");
+  }
+};
+```
+
+```js
+let bird = {
+  name: "Donald",
+};
+
+let plane = {
+  model: "777",
+};
+
+flyMixin(bird);
+flyMixin(plane);
+
+bird.fly();  // Flying, wooosh!
+plane.fly();  // Flying, wooosh!
+```
+
+
+
+## Closure
+
+The simplest way to make property private is by creating a variable within the constructor function. This changes the scope of that variable to be within the constructor function versus available globally. This way, the variable can only be accessed and changed by methods also within the constructor function.
+
+```js
+function Bird() {
+  let hatchedEgg = 10;  // 'let'!! not `this`!!
+
+  this.getHatchedEggCount = function() { 
+    return hatchedEgg;
+  };
+}
+let ducky = new Bird();
+ducky.getHatchedEggCount();
+```
+
+The private variable `hatchedEgg` can only be accessed by `getHatchedEggCount`.
+
+
+
+## Immediately Invoked Function Expression(IIFE)
+
+A common pattern in JavaScript is to execute a function as soon as it is declared:
+
+```js
+(function () {
+  console.log("Chirp, chirp!");
+})();  // Chirp, chirp!
+```
+
+Note that the function has no name and is not stored in a variable. The two parentheses `()` at the end of the function expression cause it to be immediately executed or invoked.
+
+### module
+
+IIFE is often used to group related functionality into a single object or module. We can group mixins into a module as follows:
+
+```js
+function glideMixin(obj) {
+  obj.glide = function() {
+    console.log("Gliding on the water");
+  };
+}
+function flyMixin(obj) {
+  obj.fly = function() {
+    console.log("Flying, wooosh!");
+  };
+}
+
+let motionModule = (function () {
+  return {
+    glideMixin: function(obj) {
+      obj.glide = function() {
+        console.log("Gliding on the water");
+      };
+    },
+    flyMixin: function(obj) {
+      obj.fly = function() {
+        console.log("Flying, wooosh!");
+      };
+    }
+  }
+})();
+```
+
+Note that you have an immediately invoked function expression (IIFE) that returns an object `motionModule`. This returned object contains all of the mixin behaviors as properties of the object.
+
+```js
+motionModule.glideMixin(duck);
+duck.glide();  // Gliding on the water
+```
+
