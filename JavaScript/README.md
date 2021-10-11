@@ -79,6 +79,18 @@ var a = parseInt("11", 2);
 
 The radix variable says that `11` is in the binary system, or base 2. This example converts the string `11` to an integer `3`.
 
+#### `split()`
+
+Splits a string into an array of strings. It takes an argument for the delimiter, which can be a character to use to break up the string or a regular expression.
+
+```js
+var str = "Hello World";
+var bySpace = str.split(" ");  // ["Hello", "World"]
+
+var otherString = "How9are7you2today";
+var byDigits = otherString.split(/\d/);  // ["How", "are", "you", "today"]
+```
+
 
 
 ### Array
@@ -187,6 +199,143 @@ let weatherConditions = ['rain', 'snow', 'sleet', 'hail', 'clear'];
 let todaysWeather = weatherConditions.slice(1, 3);
 console.log(weatherConditions)  // ['rain', 'snow', 'sleet', 'hail', 'clear']
 console.log(todaysWeather)  // ['snow', 'sleet']
+```
+
+##### `concat()`
+
+For arrays, the method is called on one, then another array is provided as the argument to `concat`, which is added to the end of the first array. It returns a new array and does not mutate either of the original arrays.
+
+```js
+[1, 2, 3].concat([4, 5, 6]);  // [1, 2, 3, 4, 5, 6]
+```
+
+##### `map()`
+
+The `map` method iterates over each item in an array and returns a new array containing the results of calling the callback function on each element. It does this without mutating the original array.
+
+```js
+arr.map(callback(currentValue[, index[, array]])[, thisArg])
+```
+
+When the callback is used, it is passed three arguments. The first argument is the current element being processed. The second is the index of that element and the third is the array upon which the `map` method was called.
+
+```js
+const users = [
+  { name: 'John', age: 34 },
+  { name: 'Amy', age: 20 },
+  { name: 'camperCat', age: 10 }
+];
+
+const names = users.map(user => user.name);
+console.log(names);  // ['John', 'Amy', 'camperCat']
+```
+
+##### `filter()`
+
+`filter` calls a function on each element of an array and returns a new array containing only the elements for which that function returns `true`. Like `map()`, it does this without needing to modify the original array.
+
+```js
+arr.filter(callback(element[, index[, array]])[, thisArg])
+```
+
+The callback function accepts three arguments. The first argument is the current element being processed. The second is the index of that element and the third is the array upon which the `filter` method was called.
+
+```js
+const users = [
+  { name: 'John', age: 34 },
+  { name: 'Amy', age: 20 },
+  { name: 'camperCat', age: 10 }
+];
+
+const usersUnder30 = users.filter(user => user.age < 30);
+console.log(usersUnder30);
+// [{name: 'Amy', age: 20}, {name: 'camperCat', age: 10}]
+```
+
+##### `reduce()`
+
+The `reduce` method iterates over each item in an array and returns a single value (i.e. string, number, object, array). This is achieved via a callback function that is called on each iteration. It's possible to show that both `filter` and `map` can be derived as special applications of `reduce`.
+
+```js
+arr.reduce(callback(previousValue, currentValue, currentIndex, array) { ... }, initialValue)
+```
+
+- `callback` : takes four arguments:
+  - *previousValue* (the value resulting from the previous call to `callbackfn`)
+  - *currentValue* (the value of the current element)
+  - *currentIndex* Optional
+  - *array* (the array to traverse) Optional
+- `initialValue` : A value to which *previousValue* is initialized the first time the callback is called. If `initialValue` is *not* specified, *previousValue* is initialized to the first value in the array, and *currentValue* is initialized to the second value in the array.
+
+```js
+const users = [
+  { name: 'John', age: 34 },
+  { name: 'Amy', age: 20 },
+  { name: 'camperCat', age: 10 }
+];
+
+const sumOfAges = users.reduce((sum, user) => sum + user.age, 0);
+console.log(sumOfAges);  // 64
+```
+
+```js
+const users = [
+  { name: 'John', age: 34 },
+  { name: 'Amy', age: 20 },
+  { name: 'camperCat', age: 10 }
+];
+
+const usersObj = users.reduce((obj, user) => {
+  obj[user.name] = user.age;
+  return obj;
+}, {});
+console.log(usersObj);  // {John: 34, Amy: 20, camperCat: 10}
+```
+
+##### `sort()`
+
+Sorts the elements of an array according to the callback function.
+
+When such a callback function, normally called `compareFunction`, is supplied, the array elements are sorted according to the return value of the `compareFunction`: If `compareFunction(a,b)` returns a value less than 0 for two elements `a` and `b`, then `a` will come before `b`. If `compareFunction(a,b)` returns a value greater than 0 for two elements `a` and `b`, then `b` will come before `a`. If `compareFunction(a,b)` returns a value equal to 0 for two elements `a` and `b`, then `a` and `b` will remain unchanged.
+
+```js
+function ascendingOrder(arr) {
+  return arr.sort(function(a, b) {
+    return a - b;
+  });
+}
+ascendingOrder([1, 5, 2, 3, 4]);  // [1, 2, 3, 4, 5]
+```
+
+##### `join()`
+
+The `join` method is used to join the elements of an array together to create a string. It takes an argument for the delimiter that is used to separate the array elements in the string.
+
+```js
+var arr = ["Hello", "World"];
+var str = arr.join(" ");  // 'Hello World'
+```
+
+##### `every()`
+
+The `every` method works with arrays to check if *every* element passes a particular test. It returns a Boolean value - `true` if all values meet the criteria, `false` if not.
+
+```js
+var numbers = [1, 5, 8, 0, 10, 11];
+numbers.every(function(currentValue) {
+  return currentValue < 10;
+});  // false
+```
+
+##### `some()`
+
+The `some` method works with arrays to check if *any* element passes a particular test. It returns a Boolean value - `true` if any of the values meet the criteria, `false` if not.
+
+```js
+var numbers = [10, 50, 8, 220, 110, 11];
+numbers.some(function(currentValue) {
+  return currentValue < 10;
+});  // true
 ```
 
 
