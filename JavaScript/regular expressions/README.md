@@ -315,6 +315,15 @@ repeatStr.match(repeatRegex); // Returns ["row row row", "row"]
 "Code Camp".replace(/(\w+)\s(\w+)/, '$2 $1');  // "Camp Code"
 ```
 
+### Using variable in Regex
+
+Use `new RegExp()`.
+
+```js
+let lookingFor = 'abc';
+let re = new RegExp(lookingFor, 'i');
+```
+
 
 
 ## References
