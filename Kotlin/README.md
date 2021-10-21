@@ -84,6 +84,8 @@ herAge = 38
     var charValue = 'A'
     ```
 
+
+
 ### 문자형
 
 #### 문자열 템플릿
@@ -150,11 +152,11 @@ array.set(index, value)
 
 ## Collection
 
-Array와는 다르게 크기를 고정하지 않는다. 크게 세 가지로 List, Map, Set이 있다.
+Array와는 다르게 크기를 고정하지 않는다. 크게 세 가지로 List, Map, Set이 있다. Kotlin에서 동적으로 collection를 사용하기 위해서는 mutable이라는 접두어가 붙는다. 접두어가 없는 collection도 있지만 잘 사용하지 않기 때문에 항상 `mutableList`, `mutableMap`, `mutableSet`을 사용한다고 생각해도 된다.
 
 ### List
 
-List는 저장되는 데이터에 인덱스를 부여한 collection이며 중복된 값을 입력할 수 있다. Kotlin에서 동적으로 list를 사용하기 위해서는 mutable이라는 접두어가 붙는다. 접두어가 없는 list도 있지만 잘 사용하지 않기 때문에 항상 `mutableList`, `mutableMap`, `mutableSet`을 사용한다고 생각해도 된다.
+List는 저장되는 데이터에 인덱스를 부여한 collection이며 중복된 값을 입력할 수 있다.
 
 #### Declaration
 
@@ -199,6 +201,8 @@ mutableList.removeAt(1)
 mutableList.size
 ```
 
+
+
 ### Set
 
 중복을 허용하지 않는 list. 인덱스로 조회 불가.
@@ -207,9 +211,79 @@ mutableList.size
 
 ```kotlin
 var set = mutableSetOf("MON", "TUE", "WED")
+var set1 = mutableSetOf<String>()
+```
+
+#### Adding values
+
+```kotlin
+set.add("JAN")
+set.add("FEB")
+set.add("JAN")  // 동일한 값은 입력되지 않는다
+```
+
+#### Getting values
+
+Set은 인덱스로 조회하는 함수가 없기 때문에 특정 위치의 값을 직접 사용할 수 없다. 다음은 set에 있는 모든 값을 log에 출력하는 코드이다.
+
+```kotlin
+Log.d("Collection", "Set 전체 출력 = ${set}")
+```
+
+#### Deleting values
+
+```kotlin
+set.remove("FEB")
 ```
 
 
+
+### Map
+
+#### Declaration
+
+Map은 key와 value의 쌍으로 입력되는 collection이다. Map의 key는 list의 index와 비슷한데 map에서는 직접 key를 입력해야 한다.
+
+```kotlin
+var map = mutableMapOf("키1" to "값1", "키2" to "값2")
+var map1 = mutableMapOf<String, String>()
+```
+
+#### Adding values
+
+```kotlin
+map.put("키3", "값3")
+```
+
+#### Getting values
+
+```kotlin
+var val1 = map.get("키1")
+```
+
+#### Adjusting values
+
+```kotlin
+map.put("키1", "수정")
+```
+
+#### Deleting values
+
+```kotlin
+map.remove("키1")
+```
+
+
+
+### Immutable collection
+
+크기와 값 모두를 변경할 수 없는 collection이다. Immutable collection은 기존 collection에서 `mutable`이라는 접두어가 제거된 형태로 사용된다.
+
+```kotlin
+val DAY_LIST = listOf("월", "화", "수", "목", "금", "토", "일")
+```
+
+Immutable collection을 저장할 때는 val로 선언하고 변수명을 대문자로 표시하는 게 좋다.
 
 
 
@@ -303,6 +377,8 @@ when {
 
 ### 비교 연산자
 
+
+
 ### 논리 연산자
 
 | 연산자 | 의미             |
@@ -310,4 +386,129 @@ when {
 | `&&`   | 논리곱           |
 | `||`   | 논리합           |
 | `!`    | 부정 단항 연산자 |
+
+
+
+## 반복문
+
+### `for` 문
+
+```kotlin
+for (반복할 범위) {
+    // 실행 코드
+}
+
+for (변수 in 시작값..종료값) {
+    // 실행 코드
+}
+
+for (index in 1..10) {
+    Log.d("For", "현재 숫자는 ${index}")
+}
+```
+
+#### `until`
+
+마지막 숫자 제외하기. `..` 대신에 `until`을 사용하면 종료값 이전까지만 반복한다.
+
+```kotlin
+for (변수 in 시작값 until 종료값) {
+    // 실행 코드
+}
+```
+
+#### `step`
+
+`for`문의 블록을 `step` 수만큼 건너뛰면서 실행한다.
+
+```kotlin
+for (num in 1..10 step 3) {
+    Log.d("For", "${num}")  // 1, 4, 7, 10
+}
+```
+
+#### `downTo`
+
+큰 수에서 작은 수로 감소시키면서 실행할 수 있다. `step`도 사용 가능하다.
+
+```kotlin
+for (index in 10 downTo 0) {
+    Log.d("For", "현재 숫자는 ${index}")
+}
+```
+
+#### Array, Collection 내 elements 반복하기
+
+```kotlin
+var arrayMonth = arrayOf("JAN", "FEB", "MAR", "APR", "MAY", "JUN")
+for (month in arrayMonth) {
+    Log.d("for", "현재 월은 ${month}입니다.")
+}
+```
+
+
+
+### `while` 문
+
+```kotlin
+while (조건식) {
+    // 실행 코드
+}
+```
+
+#### `do`
+
+`do` 블록 안의 코드를 한 번 실행한 후 `while` 문이 실행됩니다.
+
+```kotlin
+var game = 1
+val match = 6
+do {
+    Log.d("while", "${game}게임 이겼습니다. 우승까지 ${match-game}게임 남았습니다.")
+    game += 1
+} while (game < match)
+```
+
+
+
+### 반복문 제어
+
+#### `break`
+
+#### `continue`
+
+
+
+## 함수
+
+```kotlin
+fun 함수명(parameter 이름: 타입): 반환 타입 {
+    // 실행 코드
+}
+
+fun square(x: Int, y: Int): Int {
+    return x * y
+}
+```
+
+Parameter를 정의할 때 등호(`=`)를 사용해서 기본값을 설정할 수 있다.
+
+```kotlin
+fun 함수명(name1: String, name2: Int = 157, name3: Double) {
+    // 실행 코드
+}
+```
+
+
+
+## Class
+
+```kotlin
+class 클래스명 {
+    var 변수
+    fun 함수() {
+        // 코드
+    }
+}
+```
 
