@@ -24,15 +24,19 @@ val herAge: Int
 herAge = 38
 ```
 
-### `var`
+
+
+### 종류
+
+#### `var`
 
 변경할 수 있는 변수.
 
-### `val`
+#### `val`
 
 읽기 전용 변수. 한 번 입력된 값은 변경할 수 없다.
 
-### `const`
+#### `const`
 
 상수. `val`과 같이 읽기 전용인 것은 동일하지만, 컴파일 시에 값이 결정되기 때문에 Int, Long과 같은 기본형과 문자열인 String만 입력할 수 있다.
 
@@ -109,7 +113,7 @@ var score = 98
 
 ## Array
 
-### Declaration
+#### Declaration
 
 Array 객체는 Int, Long, Char 등과 같은 기본 타입 뒤에 `Array`를 붙여서 만든다.
 
@@ -134,14 +138,14 @@ var numArray = intArrayOf(1, 2, 3, 4)
 var dayArray = arrayOf("MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN")
 ```
 
-### Getting values
+#### Getting values
 
 ```kotlin
 array[index]
 array.get(index)
 ```
 
-### Changing values
+#### Changing values
 
 ```kotlin
 array[index] = value
@@ -307,6 +311,8 @@ var bigger2 = if (a > b) {
     b
 }
 ```
+
+
 
 ### `when` 문
 
@@ -511,4 +517,454 @@ class 클래스명 {
     }
 }
 ```
+
+
+
+### Constructors
+
+#### Primary constructors
+
+```kotlin
+class Person constructor(value: String) {
+    // 코드
+}
+```
+
+생성자에 접근 제한자나 다른 옵션이 없다면 `constructor` 키워드를 생략할 수 있다.
+
+```kotlin
+class Person(value: String) {
+    
+}
+```
+
+Class의 constructor가 호출되면 `init` 블록의 코드가 실행되고, `init` 블록에서는 생성자를 통해 넘어온 parameters에 접근할 수 있다.
+
+```kotlin
+class Person(value: String) {
+    init {
+        Log.d("class", "생성자로부터 전달받은 값은 ${value}입니다.")
+    }
+}
+```
+
+Parameter 앞에 변수 키워드인 `val`을 붙여주면 `init` 블록 코드 없이도 class scope 전체에서 해당 parameter를 사용할 수 있다.
+
+```kotlin
+class Person(val value: String) {
+    fun process() {
+        print(value)
+    }
+}
+```
+
+#### Secondary constructors
+
+Secondary constructors는 `constructor` 키워드를 마치 함수처럼 class scope 안에 직접 작성할 수 있다. 그리고 `init` 블록을 작성하지 않고 `constructor` 다음에 괄호를 붙여서 코드를 작성한다.
+
+```kotlin
+class Person {
+    constructor (value: String) {
+        Log.d("class", "생성자로부터 전달받은 값은 ${value}입니다.")
+    }
+}
+```
+
+#### Default constructors
+
+Constuctor는 작성하지 않아도 `init` 코드는 사용이 가능하다.
+
+```kotlin
+class Student {
+    init {
+        // 기본 생성자가 없더라도 초기화가 필요하면 여기에 코드를 작성합니다.
+    }
+}
+```
+
+
+
+### Class의 사용
+
+```kotlin
+var kotlin = Kotlin()
+```
+
+
+
+### 상속
+
+상속이 되는 부모 class는 `open` 키워드로 만들어야만 한다.
+
+```kotlin
+open class 상속될 부모 클래스 {
+    // 코드
+}
+class 자식 클래스: 부모 클래스() {
+    // 코드
+}
+
+// parameter가 있다면
+open class 부모 클래스(value: String)
+    // 코드
+}
+class 자식 클래스(value: Stirng): 부모 클래스(value) {
+    // 코드
+}
+```
+
+부모 class에서 정의된 property와 method를 사용할 수 있다.
+
+#### Override
+
+Override할 때는 property나 method도 class처럼 `open`을 붙여줘야 한다.
+
+```kotlin
+open class BaseClass {
+    open fun opened() {
+        
+    }
+}
+class ChildClass: BaseClass() {
+    override fun opened() {
+        
+    }
+}
+```
+
+
+
+### Extensions
+
+이미 만들어져 있는 class에 메서드를 추가할 수 있다.
+
+```kotlin
+fun 클래스.확장할 메서드() {
+    // 코드
+}
+```
+
+
+
+
+
+## Object
+
+Object를 사용하면 class를 constructor로 인스턴스화 하지 않아도 블록 안의 프로퍼티와 메서드를 호출해서 사용할 수 있다.
+
+```kotlin
+object Pig {
+    var name: String = "Pinky"
+    fun printName() {
+        Log.d("class", "Pig의 이름은 ${name}입니다.")
+    }
+}
+```
+
+Object도 도트(`.`) 연산자를 그대로 사용할 수 있다.
+
+```kotlin
+Pig.name = "Mikey"
+Pig.printName()
+```
+
+### Companion object
+
+일반 class에 object 기능을 추가한다.
+
+```kotlin
+class Pig {
+    companion object {
+        var name: String = "None"
+        fun printName() {
+            Log.d("class", "Pig의 이름은 ${name}입니다.")
+        }
+    }
+    fun walk() {
+        Log.d("class", "Pig가 걸어갑니다.")
+    }
+}
+```
+
+`class` 로 선언했기 때문에 일반 함수인 `walk()`는 생성자인 `Pig()`를 호출, 변수에 저장한 후 사용할 수 있다.
+
+```kotlin
+// companion object
+Pig.name = "Linda"
+Pig.printName()
+
+// 비 companion object
+val cutePig = Pig()
+cutePig.walk()
+```
+
+
+
+## Data class
+
+간단한 값의 저장 용도.
+
+`class` 앞에 `data` 키워드를 사용해야 하고, parameters 앞에 `var`이나 `val` 키워드는 생략할 수도 있다.
+
+```kotlin
+data class 클래스명 (파라미터1: 타입, 파라미터2: 타입)
+```
+
+```kotlin
+data class UserData(val name: String, var age: Int)
+var userData = UserData("Michael", 21)
+
+userData.age = 18
+```
+
+#### `toString()`
+
+일반 class에서는 `toString()` 메서드를 호출하면 인스턴스의 주소 값을 반환하지만, data class는 값을 반환하기 때문에 실제 값을 모니터링할 때 좋다.
+
+```kotlin
+Log.d("DataClass", "DataUser는 ${dataUser.toString()}")
+// DataUser는 DataUser(name=Michael, age=21)
+```
+
+#### `copy()`
+
+값을 복사할 수 있다.
+
+```kotlin
+var newData = dataUser.copy()
+```
+
+
+
+## 추상화
+
+실제 구현 단계에서 코드를 작성하도록 메서드의 이름만 작성할 수도 있다.
+
+```kotlin
+abstract class Design {
+    abstract fun drawText()
+    abstract fun draw()
+    fun showWindow() {
+        // 코드
+    }
+}
+
+class Implements: Design() {
+    fun drawText() {
+        // 구현 코드
+    }
+    fun draw() {
+        // 구현 코드
+    }
+}
+```
+
+
+
+## Interface
+
+추상화와 다르게 실행 코드가 하나도 없이 메서드 이름만 나열되어 있다.
+
+```kotlin
+interface 인터페이스명 {
+    var 변수: String
+    fun 메서드1()
+    fun 메서드2()
+}
+```
+
+```kotlin
+class KotlinImpl: InterfaceKotlin {
+    override var variable: String = "init value"
+    override fun get() {
+        // 코드 구현
+    }
+    override fun set() {
+        // 코드 구현
+    }
+}
+```
+
+
+
+## Visibility modifiers
+
+| 접근 제한자 | 제한 범위                         |
+| ----------- | --------------------------------- |
+| `private`   | 다른 파일에서 접근 불가능         |
+| `internal`  | 같은 모듈에 있는 파일만 접근 가능 |
+| `protected` | `private`과 같으나 상속 관계에서  |
+| `public`    | 모든 파일에서 접근 가능           |
+
+아무 예약어도 붙이지 않을 경우 기본적으로 `public` 접근 제한자가 적용된다.
+
+
+
+## Generics
+
+입력되는 값의 타입을 자유롭게 사용하기 위한 설계 도구.
+
+```kotlin
+public interface MutableList<E> {
+    var list: Array<E>
+    ...
+}
+```
+
+`<E>`라고 되어 있는 부분에 `String`과 같은 특정 타입이 지정되면 class 내부에 선언된 모든 `E`에 `String`이 타입으로 지정된다. 결과적으로 `var list: Array<E>`가 `var list: Array<String>`으로 변경되는 것이다.
+
+```kotlin
+fun testGenerics() {
+    var list: MutableList<String> = mutableListOf()
+    list.add("월")
+    list.add("화")
+    // list.add(35) // String을 generics로 사용했기 때문에 list에는 String만 담을 수 있다.
+}
+```
+
+
+
+## Null safety
+
+`null`로 인해 프로그램이 멈출 수 있는데 Kotlin에는 이를 방지하기 위한 여러 장치가 있다.
+
+
+
+### `?`
+
+`null`값을 허용하기 위해서는 변수를 선언할 때 타입 뒤에 `?`를 입력한다.
+
+```kotlin
+var variable: String?
+```
+
+```kotlin
+var nullable: String?
+nullable = null
+
+var notNullable: String
+// notNullable = null // 일반 변수에는 null을 입력할 수 없다.
+```
+
+함수의 parameter에도 설정이 가능한데, parameter에 대해 따로 `null` 체크를 해야한다. 체크하지 않았을 경우`null`에 대해 오류가 발생할 수 있기 때문이다.
+
+```kotlin
+fun nullParameter(str: String?) {
+    if (str != null) {
+        var length2 = str.length  // 따로 체크하지 않았으면 오류가 발생했을 것이다.
+    }
+}
+```
+
+함수의 return 타입에도 설정 가능하다.
+
+```kotlin
+fun nullReturn(): String? {
+    return null
+}
+```
+
+
+
+### `?.`(safe call)
+
+nullable인 변수 다음에 `?.`을 사용하면 해당 변수가 `null`일 경우 `?.` 다음의 메서드나 프로퍼티를 호출하지 않는다.
+
+```kotlin
+fun testSafeCall(str: String?): Int? {
+    // str이 null이면 length를 체크하지 않고 null을 반환한다.
+    var resultNull: Int? = str?.length
+    return resultNull
+}
+```
+
+
+
+### `?:`(Elvis operator)
+
+변수가 `null`일 때 넘겨줄 기본값을 설정할 수 있다.
+
+```kotlin
+fun testElvis(str: String?): Int {
+    // length 오른쪽에 ?:을 사용하면 null일 경우 ?: 오른쪽의 값이 반환된다.
+    var resultNonNull: Int = str?.length?:0
+    return resultNonNull;
+}
+```
+
+
+
+## 지연 초기화
+
+### `lateinit`
+
+Class 안에서 변수만 nullable로 미리 선언하고 초기화는 나중에 해야 할 경우, `?`를 사용해서는 다음과 같이 할 수 있다.
+
+```kotlin
+class Person {
+    var name: String? = null
+    init {
+        name ="Lionel"
+    }
+    fun process() {
+        name?.plus(" Messi")
+        print("이름의 길이 = ${name?.length}")
+        print("이름의 첫 글자 = ${name?.substring(0, 1)}")
+    }
+}
+```
+
+위 같은 경우 safe call이 남용되어 가독성을 떨어뜨린다. 이때, `lateinit`을 사용하면 가독성을 높일 수 있다.
+
+```kotlin
+class Person {
+    lateinit var name: String
+    init {
+        name = "Lionel"
+    }
+    fun process() {
+        name.plus("Messi")
+        print("이름의 길이 = ${name.length}")
+        print("이름의 첫 글자 = ${name.substring(0, 1)}")
+    }
+}
+```
+
+#### `lateinit`의 특징
+
+- `var`로 선언된 class의 프로퍼티에만 사용할 수 있다.
+- `null`값은 허용되지 않는다.
+- 기본 자료형 `Int`, `Long`, `Double`, `Float` 등은 사용할 수 없다.
+
+
+
+### `lazy`
+
+`lazy`는 읽기 전용 변수인 `val`을 사용하는 지연 초기화이다. `val` 변수를 먼저 선언한 후 코드 뒤쪽에 `by lazy` 키워드를 사용하고, `by lazy` 다음에 나오는 중괄호(`{}`)에 초기화할 값을 쓰면 된다.
+
+```kotlin
+class Company {
+    val person: Person by lazy {
+        Person()
+    }
+    init {
+        // lazy는 선언 시에 초기화를 하기 때문에 init이 필요없다.
+    }
+    fun process() {
+        print("person의 이름은 ${person.name}") // 이때(최초 호출 시점)에 초기화된다.
+    }
+}
+```
+
+#### `lazy`의 특징
+
+- 주석에 써 있듯이 선언 시에 초기화 코드를 함께 작성하기 때문에 따로 초기화할 필요가 없다.
+
+- 선언된 **변수**가 최초 호출되는 시점에 초기화된다.
+
+
+
+## Scope functions
+
+임시로 건너뛰었음.
 
