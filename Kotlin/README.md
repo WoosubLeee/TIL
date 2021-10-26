@@ -966,5 +966,98 @@ class Company {
 
 ## Scope functions
 
-임시로 건너뛰었음.
+Scope functions는 코드를 축약해서 표현할 수 있도록 도와주는 함수이다. Scope functions에는 `run`, `let`, `apply`, `also`, `with`가 있다.
+
+Scope functions는 자신을 호출한 대상을 `this` 또는 `it`으로 대체해서 사용할 수 있다.
+
+
+
+### `this` vs `it`
+
+#### `this`로 사용되는 scope functions: `run`, `apply`, `with`
+
+Scope functions 안에서 호출한 대상을 `this`로 사용할 수 있습니다. Class 내부의 함수를 사용하는 것과 동일한 효과이기 때문에 `this`는 생략하고 메서드나 프로퍼티를 바로 사용할 수 있습니다.
+
+```kotlin
+var list = mutableListOf("Scope", "Function")
+list.run {
+    val listSize = size // this.size 대신에 this를 생략한 채로 도트 연산자(.) 없이 바로 사용 가능
+    println("리스트의 길이 run = $listSize")
+}
+list.apply {
+    val listSize = size
+    println("리스트의 길이 apply = $listSize")
+}
+with (list) {
+    val listSize = size
+    println("리스트의 길이 with = $listSize")
+}
+```
+
+#### `it`으로 사용되는 scope functions: `let`, `also`
+
+호출한 대상을 `it`으로 사용할 수 있다. `it`을 생략할 수는 없지만 `target` 등 다른 이름으로 바꿀 수는 있다.
+
+```kotlin
+var list = mutableListOf("Scope", "Function")
+// it을 target 등과 같이 다른 이름으로 변경 가능하다.
+list.let { target ->
+    val listSize = target.size
+    println("리스트의 길이 let = $listSize")
+}
+list.also {
+    val listSize = it.size
+    println("리스트의 길이 also = $listSize")
+}
+```
+
+
+
+### 반환값으로 구분하기
+
+#### 호출 대상인 `this` 자체를 반환하는 scope functions: `apply`, `also`
+
+Scope function 안에서 코드가 모두 완료된 후 자기 자신을 되돌려준다.
+
+```kotlin
+var list = mutableListOf("Scope", "Function")
+
+var afterApply = list.apply {
+    add("Apply")
+    count()
+}
+println("반환값 apply = $afterApply") // 반환값 apply = [Scope, Function, Apply]
+
+var afterAlso = list.also {
+    it.add("Also")
+    it.count()
+}
+println("반환값 also = $afterAlso") // 반환값 also = [Scope, Function, Apply, Also]
+```
+
+#### 마지막 실행 코드를 반환하는 scope functions: `let`, `run`, `with`
+
+자기 자신이 아닌 scope의 마지막 코드를 반환한다.
+
+```kotlin
+var list = mutableListOf("Scope", "Function")
+
+val lastCount = list.let {
+    it.add("Run")
+    it.count()
+}
+println("반환값 let = $lastCount") // 반환값 let = 3
+
+val lastItem = list.run {
+    add("Run")
+    get(size-1)
+}
+println("반환값 run = $lastItem") // 반환값 run = Run
+
+val lastItemWith = with(list) {
+    add("With")
+    get(size-1)
+}
+println("반환값 with = $lastItemWith") // 반환값 with = With
+```
 
