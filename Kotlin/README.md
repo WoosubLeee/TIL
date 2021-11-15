@@ -291,6 +291,17 @@ Immutable collection을 저장할 때는 val로 선언하고 변수명을 대문
 
 
 
+### Slicing values
+
+```kotlin
+val numbers = listOf("one", "two", "three", "four", "five", "six")
+println(numbers.slice(1..3)) // [two, three, four]
+println(numbers.slice(0..4 step 2)) // [one, three, five]
+println(numbers.slice(setOf(3, 5, 0))) // [four, six, one]
+```
+
+
+
 ## 조건문
 
 ### `if` 문
