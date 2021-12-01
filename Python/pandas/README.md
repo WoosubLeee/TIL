@@ -48,6 +48,46 @@ df = pd.DataFrame(data)
 
 ![image-20210830162813247](README.assets/image-20210830162813247.png)
 
+###### `pandas.DataFrame.loc`
+
+Access a group of rows and columns by label or a boolean array. `.loc[]` is primarily label based, but may also be used with a boolean array.
+
+기본적인(label을 사용하는) 사용 예시는 다음과 같다.
+
+```python
+            max_speed  shield
+cobra               1       2
+viper               4       5
+sidewinder          7       8
+```
+
+```python
+df.loc['viper']
+"""
+max_speed    4
+shield       5
+Name: viper, dtype: int64
+"""
+```
+
+하지만 boolean value도 사용이 가능하다.
+
+```python
+df.loc[df['shiled'] > 6]
+"""
+            max_speed  shield
+sidewinder          7       8
+"""
+
+df.loc[df['shield'] > 6, ['max_speed']]
+"""
+            max_speed
+sidewinder          7
+"""
+```
+
+
+
 ##### 3차원 자료구조 Panel
 
 Panel은 Axis 0 (items), Axis 1 (major_axis), Axis 2 (minor_axis) 등 3개의 축을 가지고 있는데, Axis 0은 그 한 요소가 2차원의 DataFrame 에 해당되며, Axis 1은 DataFrame의 행(row)에 해당되고, Axis 2는 DataFrame의 열(column)에 해당된다.
