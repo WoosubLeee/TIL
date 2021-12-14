@@ -27,6 +27,20 @@ fun main() {
 }
 ```
 
+다음과 같이 축약해서 사용할 수도 있다. Scope function인 `with`를 활용한다.
+
+```kotlin
+import java.util.StringTokenizer
+
+fun main() = with(System.`in`.bufferedReader()) {
+    repeat(readLine().toInt()) {
+        val token = StringTokenizer(readLine())
+        val sum = (token.nextToken().toInt() + token.nextToken().toInt()).toString()
+        print(sum)
+    }
+}
+```
+
 
 
 ## References
