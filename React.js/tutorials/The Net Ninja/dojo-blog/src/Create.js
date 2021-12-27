@@ -5,7 +5,7 @@ const Create = () => {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [author, setAuthor] = useState('mario');
-  const [isPending, setIsPending] = useState('false');
+  const [isPending, setIsPending] = useState(false);
   const history = useHistory();
 
   const handleSubmit = (e) => {
@@ -21,10 +21,9 @@ const Create = () => {
     }).then(() => {
       console.log('new blog added');
       setIsPending(false);
-      // history.go(-1);
       history.push('/');
     })
-  };
+  }
 
   return (
     <div className="create">
@@ -52,10 +51,7 @@ const Create = () => {
           <option value="yoshi">yoshi</option>
         </select>
         { !isPending && <button>Add Blog</button> }
-        { isPending && <button disabled>Adding blog...</button> }
-        <p>{ title }</p>
-        <p>{ body }</p>
-        <p>{ author }</p>
+        { isPending && <button disabled>Adding Blog...</button> }
       </form>
     </div>
   );
