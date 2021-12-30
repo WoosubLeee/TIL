@@ -80,7 +80,7 @@ Find more than the first match.
 
 ```js
 let testStr = "Repeat, Repeat, Repeat";
-let ourRegex = /Repeat/;
+let ourRegex = /Repeat/g;
 testStr.match(ourRegex);  // ["Repeat", "Repeat", "Repeat"]
 ```
 
