@@ -133,10 +133,27 @@ console.log(howMany("string", null, [1, 2, 3], { }));  // You have passed 4 argu
 
 ES6 introduces the spread operator, which allows us to expand arrays and other expressions in places where multiple parameters or elements are expected.
 
+#### Array
+
 ```js
 var arr = [6, 89, 3, 45];
 var maximus = Math.max.apply(null, arr);  // until ES5
 const maximus = Math.max(...arr);  // ES6
+```
+
+#### Object
+
+```js
+const obj = { a: 1, b: 2 };
+
+const obj2 = {
+  // copy obj
+  ...obj,
+  // overwrite a
+  a: 3
+};
+
+console.log(obj2);  // { a: 3, b: 2 }
 ```
 
 However, the spread operator only works in-place, like in an argument to a function or in an array literal. The following code will not work.
