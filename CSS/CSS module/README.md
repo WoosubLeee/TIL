@@ -8,26 +8,50 @@ CSS module은 CSS 클래스를 불러와서 사용할 때 `[파일이름]_[클�
 
 CSS Module을 사용하기 위해서는 `[파일이름].module.css` 이런식으로 파일을 저장하면 된다. css 내부 코드는 기존과 같이 작성하면 된다.
 
+```css
+/* Box.module.css */
+
+.Box {
+  background: black;
+  color: white;
+  padding: 2rem;
+}
+```
+
 이를 JS에 적용하기 위해선 일단 `import`를 하고, `className={styles.[클래스이름]}` 과 같은 형식으로 설정해주면 된다.
 
-```jsx
-import React from 'react';
-import styles from './CSSModule.module.css';
+```javascript
+// Box.js
 
-const CSSModule = () => {
-  return (
-    <div className={`${styles.wrapper} ${styles.inverted}`}>
-      안녕하세요, 저는 <span className="something">CSS Module!</span>
-    </div>
-  );
+import React from "react";
+import styles from "./Box.module.css";
+
+function Box() {
+  return <div className={styles.Box}>{styles.Box}</div>;
 }
 
-export default CSSModule;
+export default Box;
 ```
+
+만약에 CSS Module을 사용한 클래스이름을 두개 이상 적용할 때는 이렇게 하면 된다.
+
+```jsx
+return (
+  <div className={`${styles.wrapper} ${styles.inverted}`}>
+    안녕하세요, 저는 <span className="something">CSS Module!</span>
+  </div>
+);
+```
+
+다음과 같이 클래스에 대해 고유한 이름이 만들어져 중복이 발생하지 않게 된다.
+
+<img src="https://i.imgur.com/kEE8Swd.png" alt="img" style="zoom:50%;" />
 
 
 
 ## References
 
 https://hangem-study.readthedocs.io/en/latest/css/module/
+
+https://react.vlpt.us/styling/02-css-module.html
 
