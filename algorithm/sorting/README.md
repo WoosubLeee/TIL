@@ -1,5 +1,48 @@
 # Sorting algorithm
 
+## O(n+k)의 시간복잡도
+
+### Counting sort(카운팅 정렬)
+
+![Counting Sort GIF - Counting Sort - Discover &amp; Share GIFs](https://c.tenor.com/zswbYsLbYqEAAAAd/counting-sort.gif)
+
+항목들의 순서를 결정하기 위해 집합에 각 항목이 몇 개씩 있는지 세는 작업을 하여, 선형 시간에 정렬하는 효율적인 알고리즘.
+
+#### 제한 사항
+
+- 정수나 정수로 표현할 수 있는 자료에 대해서만 적용 가능
+- 집합 내의 가장 큰 정수를 알아야 한다.
+
+#### 시간복잡도
+
+O(n+k) : n은 집합 길이, k는 정수의 최댓값
+
+#### ex)
+
+```python
+def counting_sort(array):
+    max_num = max(array)
+    counting_array = [0] * (max_num + 1)
+
+    for i in array:
+        counting_array[i] += 1
+    
+    # 등장 횟수를 누적합으로 바꿔준다.
+    for i in range(max_num):
+        counting_array[i + 1] += counting_array[i]
+
+    # output array 생성
+    output_array = [-1] * len(array)
+
+    # output array에 정렬하기(counting array를 참조)
+    for i in array:
+        output_array[counting_array[i] - 1] = i
+        counting_array[i] -= 1
+    return output_array
+```
+
+
+
 ## O(n²)의 시간복잡도
 
 ### Bubble sort(버블 정렬)
@@ -106,21 +149,25 @@ def merge_sort(array):
 #### ex)
 
 ```python
-def quick_sort(array):
-	if len(array) <= 1:
-		return array
+def quick_sort(array, start, end):
+    if start >= end: # 원소가 1개인 경우 종료
+        return
     
-	pivot = len(array) // 2
-	front_arr, pivot_arr, back_arr = [], [], []
-	for value in array:
-		if value < array[pivot]:
-			front_arr.append(value)
-		elif value > array[pivot]:
-			back_arr.append(value)
-		else:
-			pivot_arr.append(value)
-	print(front_arr, pivot_arr, back_arr)
-	return quick_sort(front_arr) + quick_sort(pivot_arr) + quick_sort(back_arr)
+    pivot = (left + right) // 2 # 피벗은 첫 번째 원소
+    left, right = start, end
+    
+    while left <= right:
+        # 피벗보다 큰 데이터를 찾을 때까지 반복 
+        while array[left] < array[pivot]:
+            left += 1
+        # 피벗보다 작은 데이터를 찾을 때까지 반복
+        while array[right] > array[pivot]:
+            right -= 1
+        if left <= right:
+            array[left], array[right] = array[right], array[left]
+    # 분할 이후 왼쪽 부분과 오른쪽 부분에서 각각 정렬 수행
+    quick_sort(array, start, right)
+    quick_sort(array, left, end)
 ```
 
 ### Heap sort(힙 정렬)
@@ -135,7 +182,7 @@ def quick_sort(array):
 
 최대 heap tree나, 최소 heap tree를 구성해 정렬하는 방법.
 
-- 내림차순 기준
+- 오름차순 기준
   1. n개의 요소들로 최대 heap을 만든다.
   2. 하나씩 요소(최대값 = 루트 노드)를 heap에서 꺼내서 배열의 뒤부터 저장한다.
 
@@ -144,11 +191,11 @@ def quick_sort(array):
 ```python
 def heapify(unsorted, index, heap_size):
     largest = index
-    left_index = 2 * index + 1
-    right_index = 2 * index + 2
-    if left_index < heap_size and unsorted[left_index] > unsorted[largest]:
+    left_index = 2 * index
+    right_index = 2 * index + 1
+    if left_index <= heap_size and unsorted[left_index] > unsorted[largest]:
         largest = left_index
-    if right_index < heap_size and unsorted[right_index] > unsorted[largest]:
+    if right_index <= heap_size and unsorted[right_index] > unsorted[largest]:
         largest = right_index
     if largest != index:
         unsorted[largest], unsorted[index] = unsorted[index], unsorted[largest]
@@ -156,21 +203,14 @@ def heapify(unsorted, index, heap_size):
         
 def heap_sort(unsorted):
     n = len(unsorted)
-    # BUILD-MAX-HEAP (A) : 위의 1단계
-    # 인덱스 : (n을 2로 나눈 몫-1)~0
-    # 최초 힙 구성시 배열의 중간부터 시작하면 
-    # 이진트리 성질에 의해 모든 요소값을 
-    # 서로 한번씩 비교할 수 있게 됨 : O(n)
-    for i in range(n // 2 - 1, -1, -1):
-        heapify(unsorted, i, n)
-    # Recurrent (B) : 2~4단계
-    # 한번 힙이 구성되면 개별 노드는
-    # 최악의 경우에도 트리의 높이(logn)
-    # 만큼의 자리 이동을 하게 됨
-    # 이런 노드들이 n개 있으므로 : O(nlogn)
+    
+    # max heap 생성
     for i in range(n - 1, 0, -1):
-        unsorted[0], unsorted[i] = unsorted[i], unsorted[0]
-        heapify(unsorted, 0, i)
+        heapify(unsorted, i, n-1)
+        
+    for i in range(n - 1, 0, -1):
+        unsorted[1], unsorted[i] = unsorted[i], unsorted[1]
+        heapify(unsorted, 1, i-1)
     return unsorted
 ```
 
