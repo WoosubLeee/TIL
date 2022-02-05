@@ -47,6 +47,18 @@ return (
 
 <img src="https://i.imgur.com/kEE8Swd.png" alt="img" style="zoom:50%;" />
 
+### `className`에 `-`(hyphen) 사용하는 법
+
+```jsx
+<div className={styles.app-body} />
+```
+
+위와 같이 `className`에 `-`을 사용하려 하면 오류가 발생한다. 이를 해결하려면, array 형식으로 작성하면 된다.
+
+```jsx
+<div className={styles['app-body']} />
+```
+
 
 
 ## References
