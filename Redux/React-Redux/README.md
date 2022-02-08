@@ -28,6 +28,8 @@ const selectTodoDescriptions = state => {
 }
 ```
 
+It's recommend prefixing selector function names with the word `select` combined with a description of the value being selected.
+
 ### Multiple selectors
 
 **We can call `useSelector` multiple times within one component**. In fact, this is actually a good idea - **each call to `useSelector` should always return the smallest amount of state possible**.

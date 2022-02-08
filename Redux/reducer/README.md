@@ -154,5 +154,3 @@ const rootReducer = combineReducers({
 
 export default rootReducer
 ```
-
-store 부분부터
