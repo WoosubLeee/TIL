@@ -59,6 +59,32 @@
 
 
 
+## Python `heapq` 모듈
+
+```python
+import heapq
+```
+
+### 기존 리스트를 Heap으로 변환
+
+```python
+heapq.heapify(리스트)
+```
+
+### Heap에 원소 추가
+
+```python
+heapq.heappush(heap, element)
+```
+
+### Heap에서 원소 삭제
+
+```python
+heapq.heappop(heap)
+```
+
+
+
 ## References
 
 https://gmlwjd9405.github.io/2018/05/10/data-structure-heap.html ([자료구조] 힙(heap)이란)
