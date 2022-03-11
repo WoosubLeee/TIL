@@ -3,12 +3,28 @@
 ### 8 data types
 
 1. `undefined`
+
 2. `null`
+
 3. `boolean`
+
 4. `string`
+
 5. `symbol`
+
 6. `bigint`
+
+   `BigInt`는 정수 리터럴의 뒤에 n을 붙이거나 function `BigInt()`를 호출해 생성할 수 있다.
+
+   ```js
+   const theBiggestInt = 9007199254740991n;
+   const alsoHuge = BigInt(9007199254740991);
+   ```
+
+   `BigInt`와 `Number`는 어떤 면에서 비슷하지만 중요한 차이점이 있다. 예컨대 `BigInt`는 내장 `Math` 객체의 메서드와 함께 사용할 수 없고, 연산에서 `Number`와 혼합해 사용할 수 없다. 따라서 먼저 같은 자료형으로 변환해야 한다. 그러나, `BigInt`가 `Number`로 바뀌면 정확성을 잃을 수 있으니 주의해야 한다.
+
 7. `number`
+
 8. `object`
 
 
@@ -628,3 +644,9 @@ for (var i = 0; i < 5; i++) {
 }
 // [0, 1, 2, 3, 4]
 ```
+
+
+
+## References
+
+[BigInt](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/BigInt)
