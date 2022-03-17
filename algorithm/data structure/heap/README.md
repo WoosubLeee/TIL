@@ -26,7 +26,7 @@
 
 - 구현을 쉽게 하기 위하여 배열의 첫번째 인덱스인 0은 사용하지 않는다.
 
-  ![img](https://gmlwjd9405.github.io/images/data-structure-heap/heap-index-parent-child.png)
+  ![img](README.assets/heap-index-parent-child.png)
 
 ### 데이터 삽입
 
@@ -35,7 +35,7 @@
 3. 규칙에 맞으면 그대로 두고, 그렇지 않으면 부모와 교환한다.
 4. 규칙에 맞을 때까지 3번 과정을 반복한다.
 
-![4-15-3](https://w.namu.la/s/f1ea49729dc682c171a43c8f8ad0d915304bb866372dac804a71d0e797434228dc35bf91ce2cfa5cc3e07b2ba78cb664600e2a86f27d43e12df4b499d0f58aae7841162ab97729aacf97a4ad991075dc80919979fcb7fdad36e5d13d3293840bc61d87413b36c9d5c9ff52bb7891ed98)
+![image-20220318011442869](README.assets/image-20220318011442869.png)
 
 ### 데이터 삭제
 
@@ -55,7 +55,7 @@
      3. 부모보다 더 작은 자식이 둘 있으면 자식들 중 작은 값과 교환한다.
 5. 조건을 만족할 때까지 4의 과정을 반복한다.
 
-![4-15-4](https://w.namu.la/s/397854bf91be7eee12e17d48f4c3fd4f48706e2cbbd75bdd601d0a2cb97fbc3fbc22ac3b9df2f9c305accebbee7046b7b3c450a60b9827f723dbe6f8290cbfaa90c61f9df1afd19fb512d676af7e0e99dce9e899b2c00455a33278643563ea0d162ca328240b1c45f0dd3573a7f98fb2)
+![image-20220318011500409](README.assets/image-20220318011500409.png)
 
 
 
