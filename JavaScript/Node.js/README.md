@@ -1,4 +1,6 @@
-# Events
+# Node.js
+
+## Events
 
 Node.js는 event 기반 비동기 방식의 서버프레임워크이다. Node.js에서는 기본적으로 아래의 세 가지 함수와 객체를 이용해서 event 처리를 하게된다.
 
@@ -6,9 +8,7 @@ Node.js는 event 기반 비동기 방식의 서버프레임워크이다. Node.js
 - `on()` : event를 연결하는 메소드다.
 - `emit()` : event를 발생시킨다.
 
-
-
-## event를 가진 객체 만들기
+### event를 가진 객체 만들기
 
 ```js
 // 1. 이벤트가 정의되어있는 events 모듈 생성
@@ -28,7 +28,29 @@ custom_object.emit('call');
 
 
 
+## npm
+
+### scripts
+
+The `"scripts"` property of your `package.json` file supports a number of built-in scripts and their preset life cycle events as well as arbitrary scripts. These all can be executed by running `npm run-script <stage>` or `npm run <stage>` for short.
+
+#### Pre & Post scripts
+
+To create "pre" or "post" scripts for any scripts defined in the `"scripts"` section of the `package.json`, simply create another script *with a matching name* and add "pre" or "post" to the beginning of them.
+
+```js
+{
+  "scripts": {
+    "precompress": "{{ executes BEFORE the `compress` script }}",
+    "compress": "{{ run command to compress files }}",
+    "postcompress": "{{ executes AFTER `compress` script }}"
+  }
+}
+```
+
+
+
 ## References
 
-https://javafa.gitbooks.io/nodejs_server_basic/content/chapter7.html (event 사용하기)
+[event 사용하기](https://javafa.gitbooks.io/nodejs_server_basic/content/chapter7.html)
 
