@@ -78,7 +78,7 @@ store.dispatch(fetchSomeData)
 
 ## Redux async data flow
 
-![Redux async data flow diagram](https://redux.js.org/assets/images/ReduxAsyncDataFlowDiagram-d97ff38a0f4da0f327163170ccc13e80.gif)
+![Redux async data flow diagram](README.assets/ReduxAsyncDataFlowDiagram-d97ff38a0f4da0f327163170ccc13e80.gif)
 
 
 
