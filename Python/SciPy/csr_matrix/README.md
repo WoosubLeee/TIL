@@ -49,7 +49,7 @@ print(csr_mat)
 - `indices` : 행렬의 '0'이 아닌 원소의 열의 위치
 - `data` : 행렬의 '0'이 아닌 원소 값
 
-![img](https://t1.daumcdn.net/cfile/tistory/99C845445F69BC8A32)
+![img](README.assets/99C845445F69BC8A32.png)
 
 `indptr`의 경우
 
