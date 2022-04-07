@@ -1,5 +1,23 @@
 # Python
 
+## Data structures
+
+### Dictionaries
+
+#### How to check if a dictionary is a subset of another dictionary
+
+```python
+# Python 3
+if first.items() <= second.items():
+    # true only if `first` is a subset of `second`
+```
+
+##### References
+
+[Test if dict contained in dict](https://stackoverflow.com/questions/30818694/test-if-dict-contained-in-dict)
+
+
+
 ## Functions
 
 ### `zip()`
