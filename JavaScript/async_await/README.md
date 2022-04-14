@@ -2,7 +2,7 @@
 
 ## The async keyword
 
-You put it in front of a function declaration to turn it into an **aysnc fucntion**. An async function is a function that knows how to expect the possibility of the `await` keyword being used to invoke asynchronous code.
+You put it in front of a function declaration to turn it into an **async fucntion**. An async function is a function that knows how to expect the possibility of the `await` keyword being used to invoke asynchronous code.
 
 ```js
 async function hello() { return "Hello" };

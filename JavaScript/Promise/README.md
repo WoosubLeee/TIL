@@ -90,9 +90,39 @@ doSomething()
 
 `.then` chain에서는 Promise 객체가 없더라도 계속 이어서 다음 link로 이어서 실행한다. 중간에 reject 되는 경우 바로 `.catch`문으로 이동한다.
 
+
+
 ## References
 
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
 
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises
+
+
+
+## Methods
+
+### `Promise.race()`
+
+Returns a promise that fulfills or rejects as soon as one of the promises in an iterable fulfills or rejects, with the value or reason from that promise.
+
+```js
+const promise1 = new Promise((resolve, reject) => {
+  setTimeout(resolve, 500, 'one');
+});
+
+const promise2 = new Promise((resolve, reject) => {
+  setTimeout(resolve, 100, 'two');
+});
+
+Promise.race([promise1, promise2]).then((value) => {
+  console.log(value);
+  // Both resolve, but promise2 is faster
+});
+// expected output: "two"
+```
+
+### References
+
+[Promise.race()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/race)
 

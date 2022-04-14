@@ -8,7 +8,7 @@ ES6 introduced an easy way of sharing. This involves exporting parts of a file f
 
 ## Export
 
-The first thing you do to get access to module features is export them. This is done using the `export` statement. \ They need to be top-level items, you can't `export` inside a function, for example.
+The first thing you do to get access to module features is export them. This is done using the `export` statement. They need to be top-level items, you can't `export` inside a function, for example.
 
 ### Named export
 

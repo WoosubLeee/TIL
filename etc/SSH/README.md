@@ -12,8 +12,8 @@ SSH는 Secure Shell의 줄임말로, 원격 호스트에 접속하기 위해 사
 
 SSH는 다른 컴퓨터와 통신을 하기 위해 접속을 할 때 우리가 일반적으로 사용하는 비밀번호의 입력을 통한 접속을 하지 않는다. 기본적으로 SSH는 한 쌍의 Key를 통해 접속하려는 컴퓨터와 인증 과정을 거치게 된다. 이 한 쌍의 Key는 다음과 같다.
 
-- Private Key (.pub)
-- Public Key (.pem)
+- Public Key (.pub)
+- Private Key (.pem)
 
 먼저 Public Key는 단어 뜻 그대로 공개되어도 비교적 안전한 Key이다. 이 Public Key를 통해 메시지를 전송하기 전 암호화를 하게된다. Public Key로는 암호화는 가능하지만 복호화는 불가능하다.  서버는 Public Key를 받아서, 이 Public Key로 만들어진 랜덤한 값을 생성한다. 이 값은 사용자가 올바른 키 페어를 가지고 있는지 시험하는 일종의 시험지와 같다.
 
