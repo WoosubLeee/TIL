@@ -19,17 +19,17 @@ Parametric search는 Binary search와 매우 유사하다.
 
 -> 자동차를 운전할 수 있나요?
 
-![img](https://t1.daumcdn.net/cfile/tistory/99A1BC3359BA935F1A)
+![img](README.assets/99A1BC3359BA935F1A.png)
 
 운전할 수 없는 경우 binary search와 같이 `mid + 1`을 하여 오른쪽 부분을 탐색한다.
 
-![img](https://t1.daumcdn.net/cfile/tistory/9973833359BA935F0A)
+![img](README.assets/9973833359BA935F0A.png)
 
 운전할 수 있는 경우 왼쪽 부분을 탐색한다.
 
-![img](https://t1.daumcdn.net/cfile/tistory/99AC663359BA936038)
+![img](README.assets/99AC663359BA936038.png)
 
-![img](https://t1.daumcdn.net/cfile/tistory/993E783359BA93613F)
+![img](README.assets/993E783359BA93613F.png)
 
 ### 시간 복잡도
 
@@ -40,8 +40,4 @@ O(logN)
 ## 관련 문제
 
 [BOJ 1654 랜선 자르기](https://www.acmicpc.net/problem/1654)
-
-
-
-## References
 
