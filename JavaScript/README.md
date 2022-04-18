@@ -1,6 +1,6 @@
 # JavaScript
 
-### 8 data types
+## 8 data types
 
 1. `undefined`
 
@@ -27,29 +27,15 @@
 
 8. `object`
 
+### References
 
-
-### Declare variables
-
-```js
-var variableA;
-const variableB;
-```
+[BigInt](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/BigInt)
 
 
 
-### Assignment
+## String
 
-```js
-variableA = 10;
-var variableB = 10;
-```
-
-
-
-### String
-
-#### Escape sequences
+### Escape sequences
 
 | Code | Output          |
 | ---- | --------------- |
@@ -62,7 +48,7 @@ var variableB = 10;
 | `\b` | word boundary   |
 | `\f` | form feed       |
 
-#### Index
+### Index
 
 Bracket notation을 사용한다.
 
@@ -71,7 +57,7 @@ var firstName = 'Charles';
 console.log(firstName[0]); // C
 ```
 
-##### Immutability
+### Immutability
 
 ```js
 var myStr = "Bob";
@@ -79,7 +65,7 @@ myStr[0] = "J";
 // Job으로 바뀌지 않는다.
 ```
 
-#### Convert to Integer
+### Convert to Integer
 
 Use `parseInt()`
 
@@ -94,6 +80,8 @@ var a = parseInt("11", 2);
 ```
 
 The radix variable says that `11` is in the binary system, or base 2. This example converts the string `11` to an integer `3`.
+
+### Methods
 
 #### `split()`
 
@@ -121,9 +109,9 @@ replace(substr, replacerFunction)
 
 
 
-### Array
+## Array
 
-#### Index
+### Index
 
 Bracket notation을 사용한다.
 
@@ -132,7 +120,7 @@ var array = [50,60,70];
 console.log(array[0]); // 50
 ```
 
-##### Mutability
+### Mutability
 
 String과는 달리 mutable하다.
 
@@ -142,7 +130,9 @@ ourArray[0] = 15;
 console.log(ourArray); // [15, 40, 30]
 ```
 
-##### `indexOf()`
+### Methods
+
+#### `indexOf()`
 
 Takes an element as a parameter, and when called, it returns the position, or index, of that element, or `-1` if the element does not exist on the array.
 
@@ -368,9 +358,9 @@ numbers.some(function(currentValue) {
 
 
 
-### Scopes
+## Scopes
 
-#### Block scope
+### Block scope
 
 Variables declared inside a `{ }` block with `let` and `const` keywords cannot be accessed from outside the block.
 
@@ -390,7 +380,7 @@ Variables declared inside a `{ }` block with `let` and `const` keywords cannot b
 // x CAN be used here
 ```
 
-#### Function scope
+### Function scope
 
 Variables declared within a JavaScript function, become local to the function.
 
@@ -405,7 +395,7 @@ function myFunction() {
 // code here can NOT use carName
 ```
 
-#### Global
+### Global
 
 - Variables defined outside of a function block
 
@@ -430,7 +420,7 @@ function myFunction() {
 }
 ```
 
-#### \* Global vs. Function
+### \* Global vs. Function
 
 When you have both global and local variables with the same name, the local variable takes precedence over the global variable.
 
@@ -445,9 +435,9 @@ function myFun() {
 
 
 
-### Operators
+## Operators
 
-#### `==` vs. `===`
+### `==` vs. `===`
 
 `==` operator checks equality only after converting both the values to a common type.
 
@@ -470,7 +460,7 @@ console.log(5 === '5');
 // all outputs are false.
 ```
 
-#### `!=` vs. `!==`
+### `!=` vs. `!==`
 
 `!=` operator checks equality only after converting both the values to a common type.
 
@@ -490,7 +480,7 @@ console.log(5 === '5');
 4 !== 3 // true
 ```
 
-#### `>`, `>=`
+### `>`, `>=`
 
 Like the `==` operator, these operators will convert data types of values while comparing.
 
@@ -500,6 +490,8 @@ Like the `==` operator, these operators will convert data types of values while 
 ```
 
 
+
+## 조건문
 
 ### `switch` statements
 
@@ -573,8 +565,6 @@ switch (num) {
 }
 ```
 
-
-
 ###  Ternary operator
 
 It can be used as a one line if-else expression. The syntax is `a ? b : c`, where `a ` is the condition, `b` is the code to run when the condition returns `true`, and `c` is the code to run when the condition returns `false`.
@@ -599,11 +589,7 @@ It's considered best practice to format multiple conditional operators such that
 
 
 
-### JSON
-
-JavaScript Object Notation
-
-
+## 반복문
 
 ### Loops
 
@@ -647,6 +633,42 @@ for (var i = 0; i < 5; i++) {
 
 
 
-## References
+## Strict mode
 
-[BigInt](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/BigInt)
+JavaScript's strict mode, introduced in ES5, is a way to *opt in* to a restricted variant of JavaScript, thereby implicitly opting-out of "sloppy mode". Strict mode makes several changes to normal JavaScript semantics:
+
+1. Eliminates some JavaScript silent errors by changing them to throw errors.
+2. Fixes mistakes that make it difficult for JavaScript engines to perform optimizations: strict mode code can sometimes be made to run faster than identical code that's not strict mode.
+3. Prohibits some syntax likely to be defined in future versions of ECMAScript.
+
+### Invoking strict mode
+
+Put the exact statement `'use strict'` or `"use strict"` before any other statements.
+
+1. entire scripts
+
+   ```js
+   // Whole-script strict mode syntax
+   'use strict';
+   var v = "Hi! I'm a strict mode script!";
+   ```
+
+2. individual functions
+
+   ```js
+   function strict() {
+     // Function-level strict mode syntax
+     'use strict';
+     function nested() { return 'And so am I!'; }
+     return "Hi!  I'm a strict mode function!  " + nested();
+   }
+   function notStrict() { return "I'm not strict."; }
+   ```
+
+3. modules, classes
+
+   All of modules and classes are strict mode code.
+
+### References
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
