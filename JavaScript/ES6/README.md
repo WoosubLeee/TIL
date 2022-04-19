@@ -23,7 +23,7 @@ s[2] = 45;  // [5, 6, 45]
 
 ### Hoisting
 
-A variable can be declared after it has been used.
+JavaScript **hoisting** refers to the process whereby the interpreter appears to move the *declaration* of functions, variables or classes to the top of their scope, prior to execution of the code.
 
 ```js
 x = 5; // Assign 5 to x
