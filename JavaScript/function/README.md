@@ -1,5 +1,196 @@
 # Function
 
+## Properties
+
+### `arguments`
+
+**`arguments`** is an `Array`-like object accessible inside functions that contains the values of the arguments passed to that function. The `arguments` object is a local variable available within all non-arrow functions.
+
+```js
+function func1(a, b, c) {
+  console.log(arguments[0]);
+  console.log(arguments[1]);
+  console.log(arguments[2]);
+}
+
+func1(1, 2, 3);
+// 1
+// 2
+// 3
+```
+
+The `arguments` object is not an `Array`. It is similar, but lacks all `Array` properties except `length`.
+
+To convert to a real `Array`:
+
+```js
+let args = [...arguments];
+```
+
+#### References
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments
+
+
+
+## Methods
+
+### `call()`, `apply()`, `bind()`
+
+In JavaScript all functions are object methods. If a function is not a method of a JavaScript object, it is a function of the global object. With these methods, you can write a method that can be used on different objects.
+
+#### `call()`
+
+With `call()`, an object can use a method belonging to another object.
+
+```js
+const person = {
+  fullName: function() {
+    return this.firstName + " " + this.lastName;
+  }
+}
+const person1 = {
+  firstName:"John",
+  lastName: "Doe"
+}
+
+// This will return "John Doe":
+person.fullName.call(person1);
+```
+
+The `call()` method can accept arguments:
+
+```js
+const person = {
+  fullName: function(city, country) {
+    return this.firstName + " " + this.lastName + "," + city + "," + country;
+  }
+}
+
+const person1 = {
+  firstName:"John",
+  lastName: "Doe"
+}
+
+person.fullName.call(person1, "Oslo", "Norway");
+```
+
+#### `apply()`
+
+The `apply()` method is similar to the `call()` method.
+
+```js
+const person = {
+  fullName: function() {
+    return this.firstName + " " + this.lastName;
+  }
+}
+
+const person1 = {
+  firstName: "Mary",
+  lastName: "Doe"
+}
+
+// This will return "Mary Doe":
+person.fullName.apply(person1);
+```
+
+##### vs `call()`
+
+The difference is:
+
+The `call()` method takes arguments **separately**.
+The `apply()` method takes arguments as an **array**.
+
+```js
+const person = {
+  fullName: function(city, country) {
+    return this.firstName + " " + this.lastName + "," + city + "," + country;
+  }
+}
+
+const person1 = {
+  firstName:"John",
+  lastName: "Doe"
+}
+
+person.fullName.apply(person1, ["Oslo", "Norway"]);
+```
+
+***
+
+#### `bind()`
+
+With the `bind()` method, an object can borrow a method from another object. It creates a new function that has its `this` keyword set to the provided value, with a given sequence of arguments preceding any provided when the new function is called.
+
+```js
+const person = {
+  firstName:"John",
+  lastName: "Doe",
+  fullName: function () {
+    return this.firstName + " " + this.lastName;
+  }
+}
+
+const member = {
+  firstName:"Hege",
+  lastName: "Nilsen",
+}
+
+let fullName = person.fullName.bind(member);
+```
+
+##### Preserving `this`
+
+Sometimes the `bind()` method has to be used to prevent loosing **this**. This example will try to display the person name after 3 seconds, but it will display **undefined** instead:
+
+```js
+const person = {
+  firstName:"John",
+  lastName: "Doe",
+  display: function () {
+    let x = document.getElementById("demo");
+    x.innerHTML = this.firstName + " " + this.lastName;
+  }
+}
+
+setTimeout(person.display, 3000);
+```
+
+In the following example, the `bind()` method is used to bind person.display to person. This example will display the person name after 3 seconds:
+
+```js
+const person = {
+  firstName:"John",
+  lastName: "Doe",
+  display: function () {
+    let x = document.getElementById("demo");
+    x.innerHTML = this.firstName + " " + this.lastName;
+  }
+}
+
+let display = person.display.bind(person);
+setTimeout(display, 3000);
+```
+
+***
+
+#### `call()` vs `apply()` vs `bind()`
+
+- *Call* invokes the function and allows you to pass in arguments one by one.
+- *Apply* invokes the function and allows you to pass in arguments as an array.
+- *Bind* returns a new function, allowing you to pass in a this array and any number of arguments.
+
+#### References
+
+https://www.w3schools.com/js/js_function_bind.asp
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_objects/Function/bind
+
+https://stackoverflow.com/questions/15455009/javascript-call-apply-vs-bind
+
+
+
 ## Closure
 
 A **closure** is the combination of a function bundled together (enclosed) with references to its surrounding state (the **lexical environment**). In other words, a closure gives you access to an outer function's scope from an inner function.
@@ -136,183 +327,41 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures
 
 
 
-## `arguments`
+## Generator
 
-**`arguments`** is an `Array`-like object accessible inside functions that contains the values of the arguments passed to that function. The `arguments` object is a local variable available within all non-arrow functions.
+The `Generator` object is returned by a [generator function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*) and it conforms to both the iterable protocol and the iterator protocol. A generator function is the **`function*`** declaration (`function` keyword followed by an asterisk).
 
 ```js
-function func1(a, b, c) {
-  console.log(arguments[0]);
-  console.log(arguments[1]);
-  console.log(arguments[2]);
+function* generator() {
+  yield 1;
+  yield 2;
+  yield 3;
 }
 
-func1(1, 2, 3);
-// 1
-// 2
-// 3
+const gen = generator(); // "Generator { }"
+
+console.log(gen.next().value); // 1
+console.log(gen.next().value); // 2
+console.log(gen.next().value); // 3
 ```
 
-The `arguments` object is not an `Array`. It is similar, but lacks all `Array` properties except `length`.
+### `yield`
 
-To convert to a real `Array`:
+The `yield` keyword pauses generator function execution and the value of the expression following the `yield` keyword is returned to the generator's caller. It can be thought of as a generator-based version of the `return` keyword.
+
+The `yield` keyword causes the call to the generator's `next()` method to return an `IteratorResult` object
+
+#### Syntax
 
 ```js
-let args = [...arguments];
+[rv] = yield [expression]
 ```
+
+- `expression` : Defines the value to return from the generator function via the iterator protocol. If omitted, `undefined` is returned instead.
+- `rv` : Retrieves the optional value passed to the generator's `next()` method to resume its execution.
+
+***
 
 ### References
 
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments
-
-
-
-## `call()`, `apply()`, `bind()`
-
-In JavaScript all functions are object methods. If a function is not a method of a JavaScript object, it is a function of the global object. With these methods, you can write a method that can be used on different objects.
-
-### `call()`
-
-With `call()`, an object can use a method belonging to another object.
-
-```js
-const person = {
-  fullName: function() {
-    return this.firstName + " " + this.lastName;
-  }
-}
-const person1 = {
-  firstName:"John",
-  lastName: "Doe"
-}
-
-// This will return "John Doe":
-person.fullName.call(person1);
-```
-
-The `call()` method can accept arguments:
-
-```js
-const person = {
-  fullName: function(city, country) {
-    return this.firstName + " " + this.lastName + "," + city + "," + country;
-  }
-}
-
-const person1 = {
-  firstName:"John",
-  lastName: "Doe"
-}
-
-person.fullName.call(person1, "Oslo", "Norway");
-```
-
-### `apply()`
-
-The `apply()` method is similar to the `call()` method.
-
-```js
-const person = {
-  fullName: function() {
-    return this.firstName + " " + this.lastName;
-  }
-}
-
-const person1 = {
-  firstName: "Mary",
-  lastName: "Doe"
-}
-
-// This will return "Mary Doe":
-person.fullName.apply(person1);
-```
-
-#### vs `call()`
-
-The difference is:
-
-The `call()` method takes arguments **separately**.
-The `apply()` method takes arguments as an **array**.
-
-```js
-const person = {
-  fullName: function(city, country) {
-    return this.firstName + " " + this.lastName + "," + city + "," + country;
-  }
-}
-
-const person1 = {
-  firstName:"John",
-  lastName: "Doe"
-}
-
-person.fullName.apply(person1, ["Oslo", "Norway"]);
-```
-
-### `bind()`
-
-With the `bind()` method, an object can borrow a method from another object. It creates a new function that has its `this` keyword set to the provided value, with a given sequence of arguments preceding any provided when the new function is called.
-
-```js
-const person = {
-  firstName:"John",
-  lastName: "Doe",
-  fullName: function () {
-    return this.firstName + " " + this.lastName;
-  }
-}
-
-const member = {
-  firstName:"Hege",
-  lastName: "Nilsen",
-}
-
-let fullName = person.fullName.bind(member);
-```
-
-#### Preserving `this`
-
-Sometimes the `bind()` method has to be used to prevent loosing **this**. This example will try to display the person name after 3 seconds, but it will display **undefined** instead:
-
-```js
-const person = {
-  firstName:"John",
-  lastName: "Doe",
-  display: function () {
-    let x = document.getElementById("demo");
-    x.innerHTML = this.firstName + " " + this.lastName;
-  }
-}
-
-setTimeout(person.display, 3000);
-```
-
-In the following example, the `bind()` method is used to bind person.display to person. This example will display the person name after 3 seconds:
-
-```js
-const person = {
-  firstName:"John",
-  lastName: "Doe",
-  display: function () {
-    let x = document.getElementById("demo");
-    x.innerHTML = this.firstName + " " + this.lastName;
-  }
-}
-
-let display = person.display.bind(person);
-setTimeout(display, 3000);
-```
-
-### `call()` vs `apply()` vs `bind()`
-
-- *Call* invokes the function and allows you to pass in arguments one by one.
-- *Apply* invokes the function and allows you to pass in arguments as an array.
-- *Bind* returns a new function, allowing you to pass in a this array and any number of arguments.
-
-### References
-
-https://www.w3schools.com/js/js_function_bind.asp
-
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_objects/Function/bind
-
-https://stackoverflow.com/questions/15455009/javascript-call-apply-vs-bind
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator
