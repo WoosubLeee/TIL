@@ -100,6 +100,24 @@ const myFunc = (a) => a + 100;
 const myFunc = a => a + 100;
 ```
 
+#### `this` in arrow functions
+
+Arrow functions treat `this` keyword differently. They don’t define their own context since it doesn’t have its own `this` context. They inherit that from the parent scope whenever you call `this`. `this` has nothing to do with the caller of the function. It refers to the scope where the function (the enclosing context) is present.
+
+```js
+const parent = {
+  mom_name: "Samantha Quinn",
+  mother: () => {
+    return `${this.mom_name} is my mother.`;
+  },
+};
+console.log(parent.mother()); // undefined is my mother.
+```
+
+###### References
+
+[How To Use Javascript Arrow Functions & This Keyword](https://www.section.io/engineering-education/how-to-use-javascript-arrow-functions-and-this-keyword)
+
 
 
 ### Default parameters
