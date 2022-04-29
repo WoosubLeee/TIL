@@ -26,9 +26,7 @@ fetch(API_URL)
 
 ### `POST` method
 
-`method` 옵션을 `POST`로 지정해주고,
-`headers` 옵션으로 JSON 포맷을 사용한다고 알려주고,
-`body` 옵션에 요청 전문을 JSON 포맷으로 직렬화하여 설정한다.
+`method` 옵션을 `POST`로 지정해주고, 데이터 형식에 맞는 `Content-Type`을 설정해준다. 아래에서는 일반적으로 많이 사용되는 JSON을 지정해주었다.
 
 ```js
 fetch(API_URL, {

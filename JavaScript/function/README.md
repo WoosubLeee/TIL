@@ -329,7 +329,9 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures
 
 ## Generator
 
-The `Generator` object is returned by a [generator function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*) and it conforms to both the iterable protocol and the iterator protocol. A generator function is the **`function*`** declaration (`function` keyword followed by an asterisk).
+The `Generator` object is returned by a [generator function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*) and it conforms to both the iterable protocol and the iterator protocol. Generators are functions that can be exited and later re-entered. Their context (variable bindings) will be saved across re-entrances. A generator function is the **`function*`** declaration (`function` keyword followed by an asterisk).
+
+Calling a generator function does not execute its body immediately; an [iterator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#iterator) object for the function is returned instead. When the iterator's `next()` method is called, the generator function's body is executed until the first [`yield`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/yield) expression, which specifies the value to be returned from the iterator or, with [`yield*`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/yield*), delegates to another generator function.
 
 ```js
 function* generator() {
