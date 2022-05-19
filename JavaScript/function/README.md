@@ -367,3 +367,163 @@ The `yield` keyword causes the call to the generator's `next()` method to return
 ### References
 
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator
+
+
+
+## getter, setter
+
+There are two kinds of object properties:
+
+- data properties : has a value
+- accessor properties : has a getter-setter pair of functions
+
+Accessor properties are represented by “getter” and “setter” methods. In an object literal they are denoted by `get` and `set`:
+
+```js
+let obj = {
+  get propName() {
+    // getter, the code executed on getting obj.propName
+  },
+
+  set propName(value) {
+    // setter, the code executed on setting obj.propName = value
+  }
+};
+```
+
+### `get`
+
+The `get` syntax binds an object property to a function that will be called when that property is looked up. Using `get`, you can return a dynamically computed value as a property and reflect the status of an internal variable without requiring the use of explicit method calls.
+
+- It must have exactly zero parameters.
+
+- It must not appear with a data entry for the same property.
+
+  ```js
+  {
+    x: ..., get x() { } // forbidden
+  }
+  ```
+
+#### example
+
+```js
+const expr = 'foo';
+
+const obj = {
+  log: ['example','test'],
+  get latest() {
+    if (this.log.length === 0) return undefined;
+    return this.log[this.log.length - 1];
+  }
+  get [expr]() {
+    return 'bar';
+  }
+}
+
+console.log(obj.latest); // "test"
+console.log(obj.foo); // "bar"
+```
+
+To delete a getter:
+
+```js
+delete obj.latest;
+```
+
+##### Using `defineProperty()`
+
+```js
+const o = {a: 0};
+
+Object.defineProperty(o, 'b', { get: function() { return this.a + 1; } });
+
+console.log(o.b) // Runs the getter, which yields a + 1 (which is 1)
+```
+
+----
+
+#### Smart / self-overwriting / lazy getters
+
+Getters do not *calculate* the property's value until it is accessed. A getter defers the cost of calculating the value until the value is needed. If it is never needed, you never pay the cost.
+
+```js
+get notifier() {
+  delete this.notifier;
+  return this.notifier = document.getElementById('bookmarked-notification-anchor');
+},
+```
+
+----
+
+### `set`
+
+The `set` syntax binds an object property to a function to be called when there is an attempt to set that property.
+
+- It must have exactly one parameter.
+
+- It must not appear in an object literal with another `set` or with a data entry for the same property.
+
+  ```js
+  {
+    set x(v) { },
+    set x(v) { }
+  }
+  {
+    x: ...,
+    set x(v) { }
+  }
+  
+  // both are forbidden
+  ```
+
+#### example
+
+```js
+const language = {
+  set current(name) {
+    this.log.push(name);
+  },
+  log: []
+}
+
+language.current = 'EN';
+console.log(language.log); // ['EN']
+
+language.current = 'FA';
+console.log(language.log); // ['EN', 'FA']
+```
+
+Note that `current` is not defined, and any attempts to access it will result in `undefined`. You can also use a computed property name.
+
+To delete a setter:
+
+```js
+delete language.current;
+```
+
+##### Using `defineProperty()`
+
+```js
+const o = {a: 0};
+
+Object.defineProperty(o, 'b', {
+  set: function(x) { this.a = x / 2; }
+});
+
+o.b = 10;
+//  Runs the setter, which assigns 10 / 2 (5) to the 'a' property
+
+console.log(o.a)
+//  5
+```
+
+----
+
+### References
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/set
+
+[Property getters and setters](https://javascript.info/property-accessors)
