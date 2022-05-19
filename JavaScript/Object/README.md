@@ -14,7 +14,9 @@ var anotherObject = {
 
 ## Properties
 
-### Accessing
+### How to use
+
+#### Accessing
 
 You can use **1. dot notation** or **2. bracket notation** to access object properties.
 
@@ -28,30 +30,14 @@ myObj.NoSpace;  // "USS Enterprise"
 myObj["Space Name"];  // "Kirk"
 ```
 
-#### `this`
-
-`this` refers to the object itself.
-
-```js
-let duck = {
-  name: "Aflac",
-  numLegs: 2,
-  sayName: function() {
-    return this.name;
-  }
-};
-
-console.log(duck.sayName());  // 'Aflac'
-```
-
-### Deleting
+#### Deleting
 
 ```js
 delete object.property;
 delete object["property"];
 ```
 
-### Testing
+#### Testing
 
 We could check for its presence in either of the following ways:
 
@@ -66,6 +52,26 @@ myObj.hasOwnProperty("middle");  // false
 "top" in myObj;  // true
 "middle" in myObj;  // false
 ```
+
+----
+
+### Computed property
+
+ES6 allows you to use an expression in brackets `[]`. It’ll then use the result of the expression as the property name of an object.
+
+```js
+let propName = 'c';
+
+const rank = {
+  a: 1,
+  b: 2,
+  [propName]: 3,
+};
+
+console.log(rank.c); // 3
+```
+
+[JavaScript Computed Property](https://www.javascripttutorial.net/es6/javascript-computed-property)
 
 
 
