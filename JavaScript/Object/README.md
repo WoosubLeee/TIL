@@ -136,6 +136,23 @@ Constructors follow a few conventions:
 - They use `this` keyword that refers to the new object it will create.
 - Constructors define properties and behaviors instead of returning a value as other functions might.
 
+### `new`
+
+The `new` keyword does the following things:
+
+1. Creates a blank, plain JS object, inheriting `Bird.prototype` (By adding a property `__proto__`)
+2. Binds the newly created object instance as the `this` context (i.e. all references to `this` in the constructor function now refer to the object created in the first step).
+3. `return` 값이 없거나, primitive 값을 `return` 하면 위의 `this`가 반환되고,
+   object를 `return`하면 해당 object가 반환된다.
+
+#### References
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new
+
+https://ko.javascript.info/constructor-new
+
+----
+
 ### `instanceof`
 
 `instanceof` allows you to compare an object to a constructor, return boolean value based on whether or not that object was created with the constructor.
